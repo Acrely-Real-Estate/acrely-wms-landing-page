@@ -1,0 +1,6 @@
+{
+  "name": "Acrely WMS",
+  "description": "Enterprise software landing page for Acrely Warehouse Management System (Acrely WMS) — Under Construction / Coming Soon.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
