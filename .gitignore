@@ -1,0 +1,21 @@
+# Node
+node_modules/
+
+# Build output
+/dist
+
+# Environment files
+.env
+.env.*
+
+# Logs
+npm-debug.log*
+
+# OS files
+.DS_Store
+
+# Vite cache
+.vite
+
+# Lockfiles (if using npm, commit package-lock.json; bun.lock removed intentionally)
+# bun.lock
