@@ -24,7 +24,9 @@ export const FeaturesPage: React.FC = () => {
 
           {/* Feature Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-            {featuresContent.map((feature) => {
+            {[...featuresContent]
+              .sort((a, b) => ((a as any).isComingSoon === (b as any).isComingSoon ? 0 : (a as any).isComingSoon ? 1 : -1))
+              .map((feature) => {
               const Icon = feature.icon;
               const businessValue = feature.businessValue;
 
@@ -39,9 +41,16 @@ export const FeaturesPage: React.FC = () => {
                       <Icon className="w-6 h-6" />
                     </div>
 
-                    <h3 className="text-lg font-extrabold text-[#0F172A] tracking-tight mb-3 group-hover:text-[#1E40AF] transition-colors leading-snug">
-                      {feature.title}
-                    </h3>
+                    <div className="flex items-start justify-between gap-2 mb-3">
+                      <h3 className="text-lg font-extrabold text-[#0F172A] tracking-tight group-hover:text-[#1E40AF] transition-colors leading-snug">
+                        {feature.title}
+                      </h3>
+                      {(feature as any).isComingSoon && (
+                        <span className="inline-flex shrink-0 items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 uppercase tracking-wider">
+                          Coming Soon
+                        </span>
+                      )}
+                    </div>
 
                     <p className="text-sm text-[#64748B] leading-relaxed mb-6">
                       {feature.heroSubheadline.length > 120 ? feature.heroSubheadline.substring(0, 117) + '...' : feature.heroSubheadline}

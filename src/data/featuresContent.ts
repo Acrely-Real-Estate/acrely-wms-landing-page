@@ -4,6 +4,7 @@ export const featuresContent = [
   {
     id: 'inventory-management',
     title: 'Core Inventory Management',
+    isComingSoon: false,
     icon: Database,
     heroHeadline: 'Absolute Inventory Truth',
     heroSubheadline: 'Maintain real-time, 100% accurate visibility across all bins, racks, and facilities.',
@@ -43,6 +44,7 @@ export const featuresContent = [
   {
     id: 'serial-numbers',
     title: 'Serial Number Tracking',
+    isComingSoon: true,
     icon: Barcode,
     heroHeadline: 'Track Every Individual Unit',
     heroSubheadline: 'Capture, validate, and trace unique serial numbers from receiving through dispatch.',
@@ -80,6 +82,7 @@ export const featuresContent = [
   {
     id: 'lot-batch-tracking',
     title: 'Lot & Batch Tracking',
+    isComingSoon: true,
     icon: Layers,
     heroHeadline: 'Total Supply Chain Traceability',
     heroSubheadline: 'Manage production batches, capture manufacturing dates, and execute targeted recalls.',
@@ -117,6 +120,7 @@ export const featuresContent = [
   {
     id: 'expiry-fefo',
     title: 'Expiry Tracking & FEFO',
+    isComingSoon: true,
     icon: CalendarClock,
     heroHeadline: 'Eradicate Inventory Spoilage',
     heroSubheadline: 'Automatically prioritize picking based on First Expired, First Out (FEFO) logic.',
@@ -154,6 +158,7 @@ export const featuresContent = [
   {
     id: 'cycle-counting',
     title: 'Cycle Counting',
+    isComingSoon: true,
     icon: ClipboardList,
     heroHeadline: 'Continuous Accuracy, Zero Downtime',
     heroSubheadline: 'Perform targeted inventory counts without shutting down warehouse operations.',
@@ -191,6 +196,7 @@ export const featuresContent = [
   {
     id: 'transfers',
     title: 'Location Transfers',
+    isComingSoon: false,
     icon: ArrowRightLeft,
     heroHeadline: 'Fluid Inventory Movement',
     heroSubheadline: 'Track every internal movement from bin to bin, or warehouse to warehouse.',
@@ -227,6 +233,7 @@ export const featuresContent = [
   {
     id: 'damaged-inventory',
     title: 'Damaged & Quarantined Inventory',
+    isComingSoon: true,
     icon: ShieldAlert,
     heroHeadline: 'Isolate Risk Immediately',
     heroSubheadline: 'Digitally quarantine damaged goods to prevent accidental fulfillment.',
@@ -263,6 +270,7 @@ export const featuresContent = [
   {
     id: 'reservations',
     title: 'Inventory Reservations',
+    isComingSoon: false,
     icon: Lock,
     heroHeadline: 'Protect Committed Stock',
     heroSubheadline: 'Hard-allocate inventory to specific orders, preventing double-selling.',
@@ -298,6 +306,7 @@ export const featuresContent = [
   {
     id: 'stock-aging',
     title: 'Stock Aging Analytics',
+    isComingSoon: true,
     icon: ArchiveX,
     heroHeadline: 'Identify Dead Stock Quickly',
     heroSubheadline: 'Analyze inventory velocity and identify capital tied up in slow-moving goods.',
