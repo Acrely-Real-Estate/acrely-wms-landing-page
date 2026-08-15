@@ -10,7 +10,15 @@ import {
   Box,
   Truck,
   RotateCcw,
-  Sparkles
+  Sparkles,
+  Package,
+  FileSpreadsheet,
+  CheckSquare,
+  Globe,
+  ArrowRightLeft,
+  ClipboardList,
+  Lock,
+  Layers
 } from 'lucide-react';
 
 const featuresData: Record<string, any> = {
@@ -190,6 +198,278 @@ const featuresData: Record<string, any> = {
       { name: 'Packing', path: 'packing' },
       { name: 'Barcode Scanning', path: 'barcodes' }
     ]
+  },
+  'migration-center': {
+    title: 'Acrely Migration Center',
+    isComingSoon: true,
+    icon: Package,
+    shortDesc: 'Guided data import, mapping and migration workflows for WMS transitions.',
+    businessProblem: 'Moving from a legacy WMS typically requires extensive consulting, manual data cleanup, and custom scripts to map and validate datasets.',
+    workflow: [
+      'Import existing warehouse data',
+      'Map fields automatically and manually',
+      'Identify and resolve data issues',
+      'Preview migration and validate',
+      'Execute migration and record history'
+    ],
+    capabilities: [
+      'CSV and structured data import',
+      'Automated and manual data mapping',
+      'Duplicate detection and validation',
+      'Migration preview and dry-run',
+      'Migration history and traceability'
+    ],
+    benefits: [
+      'Reduce migration effort and consulting time',
+      'Improve data quality at go-live',
+      'Reduce manual preparation tasks',
+      'Traceable migration history for audits'
+    ]
+  },
+  'insights': {
+    title: 'Acrely Insights',
+    isComingSoon: true,
+    icon: FileSpreadsheet,
+    shortDesc: 'Operational dashboards, reporting and scheduled exports for warehouse data.',
+    businessProblem: 'Operational data is often trapped in operational systems and difficult to extract for reporting, planning, and analytics.',
+    workflow: [
+      'Collect operational activity',
+      'Organize into reporting views',
+      'Select and configure dashboards',
+      'Export or schedule reports for stakeholders'
+    ],
+    capabilities: [
+      'Operational dashboards and tiles',
+      'Order history and SKU velocity',
+      'Inventory movement analytics',
+      'Report exports and scheduled reports',
+      'API/data access for external analytics'
+    ],
+    benefits: [
+      'Faster access to operational information',
+      'Reduce manual reporting effort',
+      'Improve decision-making with timely data'
+    ]
+  },
+  'zeta-ai': {
+    title: 'Zeta AI',
+    isComingSoon: true,
+    icon: Sparkles,
+    shortDesc: 'Conversational warehouse intelligence to surface issues and recommended actions.',
+    businessProblem: 'Managers spend time searching across screens and reports to understand operational problems.',
+    workflow: [
+      'Analyze operational signals',
+      'Manager asks a question or reviews an alert',
+      'Zeta identifies relevant signals and explains findings',
+      'Zeta suggests recommended next steps where appropriate'
+    ],
+    capabilities: [
+      'Natural-language questions',
+      'Operational analysis and summaries',
+      'Exception and bottleneck detection',
+      'Recommended actions and explainability'
+    ],
+    benefits: [
+      'Faster decision making',
+      'Reduced time searching for answers',
+      'Clearer operational visibility'
+    ]
+  },
+  'workflow-builder': {
+    title: 'Workflow Builder',
+    isComingSoon: true,
+    icon: CheckSquare,
+    shortDesc: 'Visual rule-based workflow configuration for operational events.',
+    businessProblem: 'Small workflow changes often require developer time or vendor support.',
+    workflow: [
+      'Select event',
+      'Define conditions',
+      'Select action',
+      'Test and publish'
+    ],
+    capabilities: [
+      'Visual workflow configuration',
+      'Conditions & actions',
+      'Testing and approval flows',
+      'Configuration history and rollback'
+    ],
+    benefits: [
+      'Faster operational changes',
+      'Reduced developer dependency',
+      'More flexible operations'
+    ]
+  },
+  'smart-error-resolution': {
+    title: 'Smart Error Resolution',
+    isComingSoon: true,
+    icon: HelpCircle,
+    shortDesc: 'Clear, human-readable error explanations with recommended remediation steps.',
+    businessProblem: 'Technical error messages can be cryptic and slow down frontline problem resolution.',
+    workflow: [
+      'System surfaces an error',
+      'Human-readable explanation displayed',
+      'Recommended next steps provided',
+      'Operator follows guidance or escalates'
+    ],
+    capabilities: [
+      'Human-readable messages',
+      'Cause identification',
+      'Recommended remediation',
+      'Error history and context'
+    ],
+    benefits: [
+      'Faster issue resolution',
+      'Reduced confusion for frontline workers',
+      'Lower support load'
+    ]
+  },
+  'acrely-scan': {
+    title: 'Acrely Scan',
+    isComingSoon: true,
+    icon: QrCode,
+    shortDesc: 'Barcode and QR scanning workflows optimized for speed: SCAN → CONFIRM → NEXT.',
+    businessProblem: 'Frontline workers need streamlined scanning flows without navigating complex screens.',
+    workflow: [
+      'SCAN → CONFIRM → NEXT'
+    ],
+    capabilities: [
+      'Barcode & QR scanning',
+      'Mobile camera scanning',
+      'Handheld scanner support',
+      'Receiving, putaway, picking, packing, transfers, counting'
+    ],
+    benefits: [
+      'Faster execution on the floor',
+      'Fewer manual entries',
+      'Reduced training complexity'
+    ]
+  },
+  'multilingual-warehouse': {
+    title: 'Multilingual Warehouse',
+    isComingSoon: true,
+    icon: Globe,
+    shortDesc: 'Localized interfaces and instructions to support frontline language preferences.',
+    businessProblem: 'Workforces with diverse language backgrounds need localized instructions for safe and accurate execution.',
+    workflow: [
+      'User selects preferred language',
+      'Interface labels and instructions adapt',
+      'Workers execute tasks with consistent workflow logic'
+    ],
+    capabilities: [
+      'Multi-language UI',
+      'Localized task instructions',
+      'Worker language preferences'
+    ],
+    benefits: [
+      'Easier training',
+      'Better accessibility',
+      'Reduced language-related errors'
+    ]
+  },
+  'integrations-hub': {
+    title: 'Integrations Hub',
+    isComingSoon: true,
+    icon: ArrowRightLeft,
+    shortDesc: 'Manage, monitor, and troubleshoot connections to external systems.',
+    businessProblem: 'Connection failures and lack of visibility make integrations hard to operate and troubleshoot.',
+    workflow: [
+      'CONNECT → AUTHENTICATE → MAP → TEST → ACTIVATE'
+    ],
+    capabilities: [
+      'Connection monitoring',
+      'Data mapping tools',
+      'Authentication flows',
+      'Testing and error visibility'
+    ],
+    benefits: [
+      'Faster troubleshooting',
+      'Better visibility into integration health',
+      'More manageable connections'
+    ]
+  },
+  'warehouse-command-center': {
+    title: 'Warehouse Command Center',
+    isComingSoon: true,
+    icon: BarChart3,
+    shortDesc: 'A consolidated operational dashboard surface for managers to see activity and attention items.',
+    businessProblem: 'Managers need one place to understand orders, exceptions, and performance across the floor.',
+    workflow: [
+      'Operational overview, orders, exceptions, active workers, pending shipments'
+    ],
+    capabilities: [
+      'Operational overview',
+      'Exception monitoring',
+      'Performance indicators',
+      'Attention-required alerts'
+    ],
+    benefits: [
+      'Faster operational awareness',
+      'Easier management',
+      'Quicker problem identification'
+    ]
+  },
+  'multi-warehouse-multi-client': {
+    title: 'Multi-Warehouse & Multi-Client',
+    isComingSoon: true,
+    icon: Layers,
+    shortDesc: 'Manage multiple warehouses and clients from a unified platform for 3PL and multi-site operations.',
+    businessProblem: 'Scaling across warehouses or clients often creates silos and operational complexity.',
+    workflow: [
+      'Company → Warehouse A → Warehouse B → Warehouse C; Client-level separation for 3PLs'
+    ],
+    capabilities: [
+      'Multiple warehouses',
+      'Multi-client organization',
+      'Client-level visibility',
+      'User access controls',
+      'Data separation'
+    ],
+    benefits: [
+      'Centralized management',
+      'Easier scaling',
+      'Support for complex warehouse structures'
+    ]
+  },
+  'acrely-sandbox': {
+    title: 'Acrely Sandbox',
+    isComingSoon: true,
+    icon: ClipboardList,
+    shortDesc: 'Isolated environment for testing configuration and workflow changes prior to production.',
+    businessProblem: 'Applying untested changes to production can cause operational disruptions.',
+    workflow: [
+      'LIVE SYSTEM → SANDBOX → TEST → VALIDATE → APPROVE → PUBLISH'
+    ],
+    capabilities: [
+      'Isolated testing environment',
+      'Workflow and configuration testing',
+      'Validation and approval flows'
+    ],
+    benefits: [
+      'Safer configuration changes',
+      'Reduced operational risk',
+      'Greater confidence before deployment'
+    ]
+  },
+  'release-safety-center': {
+    title: 'Release Safety Center',
+    isComingSoon: true,
+    icon: Lock,
+    shortDesc: 'Structured processes and checks to validate releases before they reach production.',
+    businessProblem: 'Unexpected software changes can disrupt warehouse operations if not validated in advance.',
+    workflow: [
+      'TEST → VALIDATE → DEPLOY'
+    ],
+    capabilities: [
+      'Release preview',
+      'Staging validation',
+      'Compatibility checks',
+      'Deployment history and tracking'
+    ],
+    benefits: [
+      'Safer updates',
+      'Better release visibility',
+      'Reduced deployment risk'
+    ]
   }
 };
 
@@ -221,9 +501,18 @@ export const FeatureDetailsPage: React.FC = () => {
             <div className="w-16 h-16 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shrink-0">
               <feature.icon className="w-8 h-8" />
             </div>
-            <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
-              {feature.title}
-            </h1>
+            <div>
+              <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
+                {feature.title}
+              </h1>
+              {feature.isComingSoon && (
+                <div className="mt-3">
+                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 uppercase tracking-wider">
+                    Coming Soon
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
           <p className="text-slate-300 text-xl leading-relaxed">
             {feature.shortDesc}

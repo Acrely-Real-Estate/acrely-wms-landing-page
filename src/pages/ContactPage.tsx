@@ -23,9 +23,9 @@ export const ContactPage: React.FC = () => {
             </div>
             <h2 className="text-xl font-bold text-[#0F172A] mb-2">Sales & Partnerships</h2>
             <p className="text-slate-600 mb-6 h-12">Discuss enterprise licensing, reseller partnerships, or customized deployment options.</p>
-            <a href="mailto:sales@acrely.in" className="inline-flex items-center gap-2 text-lg font-semibold text-[#1E40AF] hover:text-[#2563EB] transition-colors">
+            <a href="mailto:sales@acrelywms.com" className="inline-flex items-center gap-2 text-lg font-semibold text-[#1E40AF] hover:text-[#2563EB] transition-colors">
               <Mail className="w-5 h-5" />
-              sales@acrely.in
+              sales@acrelywms.com
             </a>
           </div>
 
@@ -36,9 +36,9 @@ export const ContactPage: React.FC = () => {
             </div>
             <h2 className="text-xl font-bold text-[#0F172A] mb-2">Technical Support</h2>
             <p className="text-slate-600 mb-6 h-12">Existing customers requiring technical assistance, troubleshooting, or API integration help.</p>
-            <a href="mailto:support@acrely.in" className="inline-flex items-center gap-2 text-lg font-semibold text-[#1E40AF] hover:text-[#2563EB] transition-colors">
+            <a href="mailto:support@acrelywms.com" className="inline-flex items-center gap-2 text-lg font-semibold text-[#1E40AF] hover:text-[#2563EB] transition-colors">
               <Mail className="w-5 h-5" />
-              support@acrely.in
+              support@acrelywms.com
             </a>
           </div>
 
@@ -49,9 +49,9 @@ export const ContactPage: React.FC = () => {
                 <h2 className="text-xl font-bold text-[#0F172A] mb-2">General Enquiries</h2>
                 <p className="text-slate-600 max-w-md">For all other questions, media inquiries, or general information about Acrely WMS.</p>
               </div>
-              <a href="mailto:info@acrely.in" className="inline-flex items-center gap-2 text-lg font-semibold text-[#1E40AF] hover:text-[#2563EB] transition-colors shrink-0">
+              <a href="mailto:info@acrelywms.com" className="inline-flex items-center gap-2 text-lg font-semibold text-[#1E40AF] hover:text-[#2563EB] transition-colors shrink-0">
                 <Mail className="w-5 h-5" />
-                info@acrely.in
+                info@acrelywms.com
               </a>
             </div>
           </div>

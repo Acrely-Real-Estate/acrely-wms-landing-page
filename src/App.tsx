@@ -16,6 +16,8 @@ import { ProductTourPage } from './pages/ProductTourPage';
 import { BookDemoPage } from './pages/BookDemoPage';
 import { DownloadPage } from './pages/DownloadPage';
 import { DocsLayout } from './components/docs/DocsLayout';
+import { PrivacyPage } from './pages/PrivacyPage';
+import { TermsPage } from './pages/TermsPage';
 
 export default function App() {
   return (
@@ -36,6 +38,8 @@ export default function App() {
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/book-demo" element={<BookDemoPage />} />
           <Route path="/download" element={<DownloadPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
         

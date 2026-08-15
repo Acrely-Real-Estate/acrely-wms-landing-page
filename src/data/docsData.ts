@@ -828,7 +828,7 @@ export const DOCS_DATA: DocCategory[] = [
             {
               id: 'operate',
               title: 'How users operate it',
-              text: 'Developers send RESTful JSON requests to api.acrely.in.'
+              text: 'Developers send RESTful JSON requests to api.acrelywms.com.'
             },
             {
               id: 'permissions',
@@ -897,7 +897,7 @@ export const DOCS_DATA: DocCategory[] = [
             {
               id: 'troubleshoot',
               title: 'Troubleshooting',
-              text: 'If the FAQ does not answer the question, contact support@acrely.in.'
+              text: 'If the FAQ does not answer the question, contact support@acrelywms.com.'
             }
           ]
         }

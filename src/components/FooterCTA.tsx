@@ -10,7 +10,7 @@ export const FooterCTA: React.FC<FooterCTAProps> = ({ onOpenContact }) => {
 
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigator.clipboard.writeText('business@acrely.in');
+    navigator.clipboard.writeText('business@acrelywms.com');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -34,11 +34,11 @@ export const FooterCTA: React.FC<FooterCTAProps> = ({ onOpenContact }) => {
           
           {/* Main mailto Button */}
           <a
-            href="mailto:business@acrely.in"
+            href="mailto:business@acrelywms.com"
             className="w-full sm:w-auto px-6 py-3 rounded-md bg-[#1E40AF] hover:bg-[#2563EB] text-white font-semibold text-sm flex items-center justify-center gap-2 transition-colors shadow-xs"
           >
             <Mail className="w-4 h-4" />
-            <span>business@acrely.in</span>
+            <span>business@acrelywms.com</span>
           </a>
 
           {/* Quick Copy Email Button */}

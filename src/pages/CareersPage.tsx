@@ -50,7 +50,7 @@ export const CareersPage: React.FC = () => {
               If you believe you would be a strong fit for our engineering or go-to-market teams, please send your resume and a brief introduction.
             </p>
             <a
-              href="mailto:careers@acrely.in"
+              href="mailto:careers@acrelywms.com"
               className="inline-flex items-center gap-2 px-8 py-4 bg-[#1E40AF] hover:bg-[#2563EB] text-white font-bold text-sm rounded-lg transition-colors shadow-md"
             >
               Email Resume
