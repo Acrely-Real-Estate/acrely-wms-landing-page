@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Layers, Mail, BookOpen, ShieldCheck } from 'lucide-react';
-import { LegalModal } from './LegalModal';
 import { Link } from 'react-router-dom';
 
 export const Footer: React.FC = () => {
-  const [legalModal, setLegalModal] = useState<'privacy' | 'terms' | null>(null);
-
   return (
     <footer className="bg-white border-t border-[#E5E7EB] pt-12 pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,11 +29,11 @@ export const Footer: React.FC = () => {
 
             <div className="pt-2 flex flex-col items-start gap-4">
               <a
-                href="mailto:info@acrely.in"
+                href="mailto:info@acrelywms.com"
                 className="inline-flex items-center gap-1.5 text-xs text-[#1E40AF] hover:underline font-semibold"
               >
                 <Mail className="w-3.5 h-3.5" />
-                <span>info@acrely.in</span>
+                <span>info@acrelywms.com</span>
               </a>
               
               <Link
@@ -124,20 +121,10 @@ export const Footer: React.FC = () => {
               </h4>
               <ul className="space-y-2 text-xs font-medium text-[#64748B]">
                 <li>
-                  <button
-                    onClick={() => setLegalModal('privacy')}
-                    className="hover:text-[#0F172A] transition-colors cursor-pointer text-left"
-                  >
-                    Privacy Policy
-                  </button>
+                  <Link to="/privacy" className="hover:text-[#0F172A] transition-colors text-left block">Privacy Policy</Link>
                 </li>
                 <li>
-                  <button
-                    onClick={() => setLegalModal('terms')}
-                    className="hover:text-[#0F172A] transition-colors cursor-pointer text-left"
-                  >
-                    Terms of Service
-                  </button>
+                  <Link to="/terms" className="hover:text-[#0F172A] transition-colors text-left block">Terms of Service</Link>
                 </li>
               </ul>
             </div>
@@ -148,7 +135,7 @@ export const Footer: React.FC = () => {
         {/* Bottom Banner */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[10px] font-medium text-[#94A3B8]">
-            © {new Date().getFullYear()} Acrely. All rights reserved.
+          © {new Date().getFullYear()} Acrely Real Estate Group. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             <span className="text-[10px] font-bold text-[#1E40AF] px-2 py-0.5 rounded bg-blue-50 border border-blue-100 uppercase tracking-wider">
@@ -158,8 +145,6 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* Global Legal Modal triggered from footer */}
-      <LegalModal type={legalModal} onClose={() => setLegalModal(null)} />
     </footer>
   );
 };

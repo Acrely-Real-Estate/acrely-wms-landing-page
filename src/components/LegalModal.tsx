@@ -51,7 +51,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
               </p>
               <p>
                 <strong>3. Contact & Inquiries</strong><br />
-                For data protection inquiries or enterprise compliance documentation, please contact our team at <strong>info@acrely.in</strong>.
+                For data protection inquiries or enterprise compliance documentation, please contact our team at <strong>info@acrelywms.com</strong>.
               </p>
             </>
           ) : (
@@ -66,7 +66,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
               </p>
               <p>
                 <strong>3. Enterprise Support</strong><br />
-                Service level agreements (SLAs) will be provided upon full commercial deployment. For early inquiries, write to <strong>info@acrely.in</strong>.
+                Service level agreements (SLAs) will be provided upon full commercial deployment. For early inquiries, write to <strong>info@acrelywms.com</strong>.
               </p>
             </>
           )}

@@ -1,4 +1,4 @@
-import { Package, Barcode, ClipboardList, Database, Clock, ArrowRightLeft, FileSpreadsheet, ShieldAlert, ArchiveX, Search, CheckSquare, Layers, Lock, CalendarClock, Sparkles } from 'lucide-react';
+import { Package, Barcode, ClipboardList, Database, Clock, ArrowRightLeft, FileSpreadsheet, ShieldAlert, ArchiveX, Search, CheckSquare, Layers, Lock, CalendarClock, Sparkles, BarChart3, QrCode, HelpCircle, Globe } from 'lucide-react';
 
 export const featuresContent = [
   {
@@ -337,5 +337,418 @@ export const featuresContent = [
     faqs: [
       { q: 'Can it calculate the cost of holding the aged stock?', a: 'Yes, if unit costs and storage rates are configured, it projects holding costs.' }
     ]
+  },
+
+  // New planned features added below
+  {
+    id: 'migration-center',
+    title: 'Acrely Migration Center',
+    isComingSoon: true,
+    icon: Package,
+    heroHeadline: 'Guided WMS Migration',
+    heroSubheadline: 'Move from legacy or existing WMS platforms with guided data import, validation, mapping, and migration workflows.',
+    businessValue: 'Reduce migration complexity and make switching WMS platforms more manageable.',
+    businessProblem: ['Moving from an existing WMS can require extensive consulting, custom work, data cleanup, and manual validation.'],
+    workflow: [
+      'Import existing warehouse data',
+      'Automatically map available fields',
+      'Identify missing, duplicate, or invalid records',
+      'Review and validate migration data',
+      'Preview the migration before execution',
+      'Execute the migration',
+      'Maintain migration history for traceability'
+    ],
+    capabilities: [
+      'CSV and structured data import',
+      'Data mapping',
+      'Data validation',
+      'Duplicate detection',
+      'Migration preview',
+      'Migration history',
+      'Error identification',
+      'Rollback/recovery workflows'
+    ],
+    benefits: [
+      'Reduce migration effort',
+      'Improve data quality',
+      'Reduce manual data preparation',
+      'Make WMS transitions easier to manage'
+    ],
+    industries: ['All Industries'],
+    whyChoose: ['Guided workflows and traceable migration history.'],
+    faqs: []
+  },
+  {
+    id: 'insights',
+    title: 'Acrely Insights',
+    isComingSoon: true,
+    icon: FileSpreadsheet,
+    heroHeadline: 'Operational Reporting & Dashboards',
+    heroSubheadline: 'Turn warehouse operational data into accessible reports, dashboards, and actionable visibility.',
+    businessValue: 'Make warehouse data easier to understand, export, and use without depending on complex reporting processes.',
+    businessProblem: ['Operational data often exists inside a WMS but can be difficult to extract for reporting, planning, analytics, and external projects.'],
+    workflow: [
+      'Acrely collects operational activity',
+      'Data is organized into usable reporting views',
+      'Managers select the information they need',
+      'Dashboards provide operational visibility',
+      'Reports can be exported or scheduled'
+    ],
+    capabilities: [
+      'Operational dashboards',
+      'Order history',
+      'SKU velocity',
+      'Inventory movement',
+      'Picking activity',
+      'Warehouse performance',
+      'Report exports',
+      'API/data access',
+      'Scheduled reporting'
+    ],
+    benefits: [
+      'Faster access to warehouse information',
+      'Less manual reporting',
+      'Better operational visibility',
+      'Easier data-driven decision making'
+    ],
+    industries: ['All Industries'],
+    whyChoose: ['Pre-built dashboards with export and scheduling options.'],
+    faqs: []
+  },
+  {
+    id: 'zeta-ai',
+    title: 'Zeta AI',
+    isComingSoon: true,
+    icon: Sparkles,
+    heroHeadline: 'Conversational Warehouse Intelligence',
+    heroSubheadline: 'AI-powered warehouse intelligence that helps managers understand operational issues and identify what needs attention.',
+    businessValue: 'Turn complex warehouse data into understandable answers and recommended actions.',
+    businessProblem: ['Warehouse managers often have to search through multiple screens and reports to understand why something is going wrong.'],
+    workflow: [
+      'Zeta analyzes available warehouse information',
+      'The manager asks a question or reviews an alert',
+      'Zeta identifies relevant operational signals',
+      'Zeta explains what is happening',
+      'Zeta provides a recommended next action where appropriate'
+    ],
+    capabilities: [
+      'Natural-language warehouse questions',
+      'Operational analysis',
+      'Exception identification',
+      'Bottleneck detection',
+      'Performance insights',
+      'Recommended actions',
+      'Conversational warehouse intelligence'
+    ],
+    benefits: [
+      'Faster decision making',
+      'Easier access to operational information',
+      'Reduced time spent searching through reports',
+      'Better visibility into warehouse problems'
+    ],
+    industries: ['All Industries'],
+    whyChoose: ['Provides human-readable explanations and recommended next steps.'],
+    faqs: []
+  },
+  {
+    id: 'workflow-builder',
+    title: 'Workflow Builder',
+    isComingSoon: true,
+    icon: CheckSquare,
+    heroHeadline: 'Visual Workflow Configuration',
+    heroSubheadline: 'Configure warehouse workflows using visual rules instead of relying on custom development for every operational change.',
+    businessValue: 'Give warehouse managers more control over operational configuration.',
+    businessProblem: ['Simple workflow changes can require developers, consultants, or vendor support.'],
+    workflow: [
+      'Select a warehouse event',
+      'Define conditions',
+      'Select the required action',
+      'Test the workflow',
+      'Publish the approved configuration'
+    ],
+    capabilities: [
+      'Visual workflow configuration',
+      'Conditions',
+      'Actions',
+      'Rule management',
+      'Testing',
+      'Approval/publishing workflow',
+      'Configuration history'
+    ],
+    benefits: [
+      'Faster operational changes',
+      'Less dependency on developers',
+      'More configurable warehouse operations',
+      'Easier workflow management'
+    ],
+    industries: ['All Industries'],
+    whyChoose: ['Visual rules reduce need for custom code.'],
+    faqs: []
+  },
+  {
+    id: 'smart-error-resolution',
+    title: 'Smart Error Resolution',
+    isComingSoon: true,
+    icon: HelpCircle,
+    heroHeadline: 'Human-Readable Error Guidance',
+    heroSubheadline: 'Replace confusing system errors with clear explanations of what happened, why it happened, and what to do next.',
+    businessValue: 'Help warehouse workers and managers resolve operational problems faster.',
+    businessProblem: ['Technical WMS error messages can be difficult for frontline workers and managers to understand.'],
+    workflow: [
+      'System surfaces an error',
+      'Human-readable explanation displayed',
+      'Recommended next steps provided',
+      'Operator follows guidance and retries or escalates'
+    ],
+    capabilities: [
+      'Human-readable errors',
+      'Error explanations',
+      'Cause identification',
+      'Recommended next steps',
+      'Context-aware troubleshooting',
+      'Error history'
+    ],
+    benefits: [
+      'Faster problem resolution',
+      'Less confusion for warehouse workers',
+      'Reduced dependency on technical support',
+      'Better operational continuity'
+    ],
+    industries: ['All Industries'],
+    whyChoose: ['Clear guidance reduces time to resolution.'],
+    faqs: []
+  },
+  {
+    id: 'acrely-scan',
+    title: 'Acrely Scan',
+    isComingSoon: true,
+    icon: QrCode,
+    heroHeadline: 'Fast Scanning Workflows',
+    heroSubheadline: 'Simple barcode and QR scanning workflows designed around fast warehouse execution.',
+    businessValue: 'Make receiving, putaway, picking, packing, transfers, and counting easier for frontline workers.',
+    businessProblem: ['Warehouse workers need fast operational workflows without navigating complicated screens.'],
+    workflow: [
+      'SCAN → CONFIRM → NEXT',
+      'Use this concept throughout the page.'
+    ],
+    capabilities: [
+      'Barcode scanning',
+      'QR scanning',
+      'Mobile camera scanning',
+      'Handheld scanner support',
+      'Receiving',
+      'Putaway',
+      'Picking',
+      'Packing',
+      'Inventory transfers',
+      'Cycle counting'
+    ],
+    benefits: [
+      'Faster warehouse execution',
+      'Fewer manual entries',
+      'Easier frontline workflows',
+      'Reduced training complexity'
+    ],
+    industries: ['All Industries'],
+    whyChoose: ['Designed for rapid, repeatable scanning tasks.'],
+    faqs: []
+  },
+  {
+    id: 'multilingual-warehouse',
+    title: 'Multilingual Warehouse',
+    isComingSoon: true,
+    icon: Globe,
+    heroHeadline: 'Localized Task Instructions',
+    heroSubheadline: 'Provide warehouse workflows and instructions in the languages workers are most comfortable using.',
+    businessValue: 'Make warehouse software more accessible to diverse frontline teams.',
+    businessProblem: ['Warehouse teams can include workers with different language backgrounds, while many enterprise systems primarily rely on one language.'],
+    workflow: [
+      'User selects a supported language',
+      'Interface labels and instructions adapt',
+      'Operational tasks remain consistent',
+      'Workers execute the same workflow in their preferred supported language'
+    ],
+    capabilities: [
+      'Multi-language interface',
+      'Localized task instructions',
+      'Worker language preferences',
+      'Consistent workflow logic across languages'
+    ],
+    benefits: [
+      'Easier training',
+      'Better accessibility',
+      'Reduced language barriers',
+      'More approachable frontline software'
+    ],
+    industries: ['All Industries'],
+    whyChoose: ['Improves usability for diverse frontline teams.'],
+    faqs: []
+  },
+  {
+    id: 'integrations-hub',
+    title: 'Integrations Hub',
+    isComingSoon: true,
+    icon: ArrowRightLeft,
+    heroHeadline: 'Manage System Connections',
+    heroSubheadline: 'Manage connections between Acrely WMS and the systems that power warehouse operations.',
+    businessValue: 'Make integrations easier to connect, monitor, and troubleshoot.',
+    businessProblem: ['Integrations can become difficult to manage when every connection requires custom work and there is limited visibility into failures.'],
+    workflow: [
+      'CONNECT → AUTHENTICATE → MAP → TEST → ACTIVATE'
+    ],
+    capabilities: [
+      'Integration management',
+      'Connection monitoring',
+      'Data mapping',
+      'Authentication',
+      'Testing',
+      'Error visibility',
+      'Integration status (Connected, Delayed, Failed)'
+    ],
+    benefits: [
+      'Better integration visibility',
+      'Faster troubleshooting',
+      'More manageable connections',
+      'Reduced operational uncertainty'
+    ],
+    industries: ['All Industries'],
+    whyChoose: ['Centralized integration tooling and monitoring.'],
+    faqs: []
+  },
+  {
+    id: 'warehouse-command-center',
+    title: 'Warehouse Command Center',
+    isComingSoon: true,
+    icon: BarChart3,
+    heroHeadline: 'Centralized Operational View',
+    heroSubheadline: 'A centralized operational view for understanding warehouse activity and identifying issues that need attention.',
+    businessValue: 'Give managers one place to understand what is happening across the warehouse.',
+    businessProblem: [],
+    workflow: [
+      'Orders',
+      'Fulfilled',
+      'Pending',
+      'Exceptions',
+      'Active Workers',
+      'Shipments Pending'
+    ],
+    capabilities: [
+      'Operational overview',
+      'Order status',
+      'Exception monitoring',
+      'Warehouse activity',
+      'Performance indicators',
+      'Attention-required alerts'
+    ],
+    benefits: [
+      'Faster operational awareness',
+      'Easier management',
+      'Better visibility',
+      'Faster identification of problems'
+    ],
+    industries: ['All Industries'],
+    whyChoose: ['Single-pane operational dashboards for managers.'],
+    faqs: []
+  },
+  {
+    id: 'multi-warehouse-multi-client',
+    title: 'Multi-Warehouse & Multi-Client',
+    isComingSoon: true,
+    icon: Layers,
+    heroHeadline: 'Scale Across Warehouses & Clients',
+    heroSubheadline: 'Manage multiple warehouses and, where applicable, multiple clients from a unified platform.',
+    businessValue: 'Support growing warehouse networks and 3PL operations without separating every operation into unrelated systems.',
+    businessProblem: ['Managing multiple warehouses or clients across separate systems increases operational overhead and creates data silos.'],
+    workflow: [
+      'Company → Warehouse A → Warehouse B → Warehouse C',
+      'For 3PL: Client A → Inventory, Orders, Users; Client B → Inventory, Orders, Users'
+    ],
+    capabilities: [
+      'Multiple warehouses',
+      'Multi-client organization',
+      'Client-level visibility',
+      'Warehouse-level operations',
+      'User access controls',
+      'Data separation'
+    ],
+    benefits: [
+      'Centralized management',
+      'Easier scaling',
+      'Better organizational control',
+      'Support for complex warehouse structures'
+    ],
+    industries: ['3PL', 'Distribution'],
+    whyChoose: ['Designed for multi-tenant operations and 3PL workflows.'],
+    faqs: []
+  },
+  {
+    id: 'acrely-sandbox',
+    title: 'Acrely Sandbox',
+    isComingSoon: true,
+    icon: ClipboardList,
+    heroHeadline: 'Isolated Testing Environment',
+    heroSubheadline: 'Test configuration and workflow changes in an isolated environment before applying them to live warehouse operations.',
+    businessValue: 'Give teams a safer way to test operational changes.',
+    businessProblem: ['Changing live warehouse configuration without proper testing can create operational risk.'],
+    workflow: [
+      'LIVE SYSTEM',
+      '↓',
+      'SANDBOX',
+      '↓',
+      'TEST',
+      '↓',
+      'VALIDATE',
+      '↓',
+      'APPROVE',
+      '↓',
+      'PUBLISH'
+    ],
+    capabilities: [
+      'Isolated testing environment',
+      'Workflow testing',
+      'Configuration testing',
+      'Validation',
+      'Approval before publishing',
+      'Change review'
+    ],
+    benefits: [
+      'Safer configuration changes',
+      'Reduced operational risk',
+      'Better testing',
+      'Greater confidence before deployment'
+    ],
+    industries: ['All Industries'],
+    whyChoose: ['Provides a safe staging area for operational changes.'],
+    faqs: []
+  },
+  {
+    id: 'release-safety-center',
+    title: 'Release Safety Center',
+    isComingSoon: true,
+    icon: Lock,
+    heroHeadline: 'Structured Release Testing',
+    heroSubheadline: 'Provide a structured process for testing and managing Acrely WMS updates before they reach production.',
+    businessValue: 'Reduce operational risk associated with software updates.',
+    businessProblem: ['Warehouse operations depend on reliable software, and unexpected changes can disrupt workflows.'],
+    workflow: [
+      'TEST → VALIDATE → DEPLOY'
+    ],
+    capabilities: [
+      'Release preview',
+      'Staging validation',
+      'Compatibility checks',
+      'Deployment history',
+      'Release tracking',
+      'Recovery/rollback workflows where supported'
+    ],
+    benefits: [
+      'Safer updates',
+      'Better release visibility',
+      'Reduced deployment risk',
+      'Greater operational confidence'
+    ],
+    industries: ['All Industries'],
+    whyChoose: ['Structured release validation workflows.'],
+    faqs: []
   }
 ];
