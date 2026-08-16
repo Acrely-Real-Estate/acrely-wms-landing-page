@@ -55,20 +55,13 @@ export const Hero: React.FC = () => {
             <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 relative">
               
               {/* Primary CTA */}
-              <a
-                href="https://demo.acrelywms.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-4 rounded-lg bg-[#1E40AF] hover:bg-[#2563EB] text-white font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer"
-              >
-                <Link
+<Link
   to="/book-demo"
-  className="flex items-center gap-2"
+  className="px-8 py-4 rounded-lg bg-[#1E40AF] hover:bg-[#2563EB] text-white font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer"
 >
   <span>Book a Demo</span>
   <ArrowRight className="w-4 h-4" />
 </Link>
-              </a>
 
               {/* Secondary CTA */}
               <a
