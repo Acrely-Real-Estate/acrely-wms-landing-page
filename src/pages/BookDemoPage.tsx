@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import {
   ArrowRight,
   CheckCircle2,
@@ -17,18 +16,13 @@ import {
   type FormErrors,
 } from "../logic/bookDemoLogic";
 
-const BookDemoPage = () => {
+const BookDemoPage: React.FC = () => {
   const [formData, setFormData] =
     useState<BookDemoFormData>(initialFormData);
 
-  const [errors, setErrors] =
-    useState<FormErrors>({});
-
-  const [isSubmitting, setIsSubmitting] =
-    useState(false);
-
-  const [isSubmitted, setIsSubmitted] =
-    useState(false);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleInputChange = (
     event: React.ChangeEvent<
@@ -37,8 +31,8 @@ const BookDemoPage = () => {
   ) => {
     handleFormInputChange(event, setFormData);
 
-    const fieldName = event.target
-      .name as keyof BookDemoFormData;
+    const fieldName =
+      event.target.name as keyof BookDemoFormData;
 
     if (errors[fieldName]) {
       setErrors((previous) => ({
@@ -73,9 +67,17 @@ const BookDemoPage = () => {
     try {
       await submitBookDemo(formData);
 
+      setFormData(initialFormData);
       setIsSubmitted(true);
 
-      setFormData(initialFormData);
+      setTimeout(() => {
+        document
+          .getElementById("book-demo")
+          ?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+      }, 50);
     } catch (error) {
       console.error(
         "Book demo submission error:",
@@ -92,86 +94,121 @@ const BookDemoPage = () => {
     }
   };
 
+  /*
+   * ============================================================
+   * SUCCESS STATE
+   * ============================================================
+   */
+
   if (isSubmitted) {
     return (
-      <div className="bg-slate-50 min-h-[calc(100vh-80px)] flex flex-col items-center pt-24 px-4 pb-20">
-        <div className="bg-white p-12 rounded-2xl border border-slate-200 shadow-sm text-center max-w-2xl w-full">
-          <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle2 className="w-10 h-10" />
+      <section
+        id="book-demo"
+        className="bg-slate-50 px-4 py-20 sm:px-6 lg:px-8"
+      >
+        <div className="mx-auto flex min-h-[500px] max-w-2xl items-center justify-center">
+          <div className="w-full rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm sm:p-12">
+            <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+              <CheckCircle2 className="h-10 w-10" />
+            </div>
+
+            <h2 className="mb-4 text-3xl font-extrabold text-[#0F172A]">
+              Thank you. Your enquiry has been received.
+            </h2>
+
+            <p className="mb-8 text-lg leading-relaxed text-slate-600">
+              An Acrely team member will review your
+              requirements and contact you shortly to arrange
+              your personalized enterprise demonstration.
+            </p>
+
+            <button
+              type="button"
+              onClick={() => {
+                setIsSubmitted(false);
+
+                setTimeout(() => {
+                  document
+                    .getElementById("book-demo")
+                    ?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                }, 50);
+              }}
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#1E40AF] px-8 py-4 font-bold text-white transition-colors hover:bg-[#2563EB]"
+            >
+              Submit Another Enquiry
+              <ArrowRight className="h-5 w-5" />
+            </button>
           </div>
-
-          <h2 className="text-3xl font-extrabold text-[#0F172A] mb-4">
-            Thank you. Your enquiry has been received.
-          </h2>
-
-          <p className="text-lg text-slate-600 mb-10">
-            An Acrely team member will review your
-            requirements and contact you shortly to arrange
-            your personalized enterprise demonstration.
-          </p>
-
-          <Link
-            to="/"
-            className="inline-block px-8 py-4 bg-[#1E40AF] text-white font-bold rounded-lg hover:bg-[#2563EB] transition-colors"
-          >
-            Return to Homepage
-          </Link>
         </div>
-      </div>
+      </section>
     );
   }
 
+  /*
+   * ============================================================
+   * MAIN FORM
+   * ============================================================
+   */
+
   return (
-    <div className="bg-slate-50 min-h-screen">
+    <section
+      id="book-demo"
+      className="bg-slate-50"
+    >
+      {/* ========================================================
+          HEADER
+      ========================================================= */}
 
-      {/* HERO */}
-
-      <section className="bg-[#0F172A] text-white pt-24 pb-20 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
-        <div className="max-w-4xl mx-auto text-center">
-
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
-            Book an Enterprise Demo
-          </h1>
-
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Tell us about your warehouse operations and
-            requirements. Our team will review your
-            information and contact you to arrange a
-            personalized Acrely WMS demonstration.
+      <div className="border-b border-slate-800 bg-[#0F172A] px-4 pb-16 pt-20 text-white sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl text-center">
+          <p className="mb-4 text-sm font-bold uppercase tracking-wider text-[#60A5FA]">
+            Acrely WMS
           </p>
 
+          <h2 className="mb-6 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+            Book an Enterprise Demo
+          </h2>
+
+          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-400">
+            Tell us about your warehouse operations and
+            requirements. Our team will review your information
+            and contact you to arrange a personalized Acrely
+            WMS demonstration.
+          </p>
         </div>
-      </section>
+      </div>
 
-      {/* FORM */}
+      {/* ========================================================
+          FORM CONTAINER
+      ========================================================= */}
 
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-
+      <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 sm:p-12 space-y-12"
+          className="space-y-12 rounded-2xl border border-slate-200 bg-white p-8 shadow-sm sm:p-12"
         >
-
-          {/* SECTION 01 */}
+          {/* ====================================================
+              SECTION 01
+          ==================================================== */}
 
           <div className="space-y-6">
-
             <div className="border-b border-slate-200 pb-4">
-              <h2 className="text-sm font-bold text-[#1E40AF] tracking-wider uppercase mb-1">
+              <p className="mb-1 text-sm font-bold uppercase tracking-wider text-[#1E40AF]">
                 Section 01
-              </h2>
+              </p>
 
               <h3 className="text-2xl font-bold text-[#0F172A]">
                 Company Information
               </h3>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-              {/* COMPANY NAME */}
-
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {/* Company Name */}
               <div>
-                <label className="block text-sm font-bold text-[#0F172A] mb-2">
+                <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                   Company Name{" "}
                   <span className="text-red-500">*</span>
                 </label>
@@ -181,24 +218,23 @@ const BookDemoPage = () => {
                   name="companyName"
                   value={formData.companyName}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 bg-slate-50 border rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors ${
+                  className={`w-full rounded-lg border bg-slate-50 px-4 py-3 transition-colors focus:outline-none focus:ring-2 focus:ring-[#1E40AF] ${
                     errors.companyName
-                      ? "border-red-500 ring-1 ring-red-500"
+                      ? "border-red-500"
                       : "border-slate-200"
                   }`}
                 />
 
                 {errors.companyName && (
-                  <p className="text-red-500 text-xs mt-1 font-bold">
+                  <p className="mt-1 text-xs font-bold text-red-500">
                     {errors.companyName}
                   </p>
                 )}
               </div>
 
-              {/* WEBSITE */}
-
+              {/* Website */}
               <div>
-                <label className="block text-sm font-bold text-[#0F172A] mb-2">
+                <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                   Company Website
                 </label>
 
@@ -207,14 +243,13 @@ const BookDemoPage = () => {
                   name="companyWebsite"
                   value={formData.companyWebsite}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors"
+                  className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 transition-colors focus:outline-none focus:ring-2 focus:ring-[#1E40AF]"
                 />
               </div>
 
-              {/* CONTACT */}
-
+              {/* Contact Person */}
               <div>
-                <label className="block text-sm font-bold text-[#0F172A] mb-2">
+                <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                   Contact Person{" "}
                   <span className="text-red-500">*</span>
                 </label>
@@ -224,24 +259,23 @@ const BookDemoPage = () => {
                   name="contactPerson"
                   value={formData.contactPerson}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 bg-slate-50 border rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors ${
+                  className={`w-full rounded-lg border bg-slate-50 px-4 py-3 transition-colors focus:outline-none focus:ring-2 focus:ring-[#1E40AF] ${
                     errors.contactPerson
-                      ? "border-red-500 ring-1 ring-red-500"
+                      ? "border-red-500"
                       : "border-slate-200"
                   }`}
                 />
 
                 {errors.contactPerson && (
-                  <p className="text-red-500 text-xs mt-1 font-bold">
+                  <p className="mt-1 text-xs font-bold text-red-500">
                     {errors.contactPerson}
                   </p>
                 )}
               </div>
 
-              {/* JOB TITLE */}
-
+              {/* Job Title */}
               <div>
-                <label className="block text-sm font-bold text-[#0F172A] mb-2">
+                <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                   Job Title{" "}
                   <span className="text-red-500">*</span>
                 </label>
@@ -251,24 +285,23 @@ const BookDemoPage = () => {
                   name="jobTitle"
                   value={formData.jobTitle}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 bg-slate-50 border rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors ${
+                  className={`w-full rounded-lg border bg-slate-50 px-4 py-3 transition-colors focus:outline-none focus:ring-2 focus:ring-[#1E40AF] ${
                     errors.jobTitle
-                      ? "border-red-500 ring-1 ring-red-500"
+                      ? "border-red-500"
                       : "border-slate-200"
                   }`}
                 />
 
                 {errors.jobTitle && (
-                  <p className="text-red-500 text-xs mt-1 font-bold">
+                  <p className="mt-1 text-xs font-bold text-red-500">
                     {errors.jobTitle}
                   </p>
                 )}
               </div>
 
-              {/* EMAIL */}
-
+              {/* Business Email */}
               <div>
-                <label className="block text-sm font-bold text-[#0F172A] mb-2">
+                <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                   Business Email{" "}
                   <span className="text-red-500">*</span>
                 </label>
@@ -278,24 +311,23 @@ const BookDemoPage = () => {
                   name="businessEmail"
                   value={formData.businessEmail}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 bg-slate-50 border rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors ${
+                  className={`w-full rounded-lg border bg-slate-50 px-4 py-3 transition-colors focus:outline-none focus:ring-2 focus:ring-[#1E40AF] ${
                     errors.businessEmail
-                      ? "border-red-500 ring-1 ring-red-500"
+                      ? "border-red-500"
                       : "border-slate-200"
                   }`}
                 />
 
                 {errors.businessEmail && (
-                  <p className="text-red-500 text-xs mt-1 font-bold">
+                  <p className="mt-1 text-xs font-bold text-red-500">
                     {errors.businessEmail}
                   </p>
                 )}
               </div>
 
-              {/* MOBILE */}
-
+              {/* Mobile */}
               <div>
-                <label className="block text-sm font-bold text-[#0F172A] mb-2">
+                <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                   Mobile Number{" "}
                   <span className="text-red-500">*</span>
                 </label>
@@ -305,43 +337,41 @@ const BookDemoPage = () => {
                   name="mobileNumber"
                   value={formData.mobileNumber}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 bg-slate-50 border rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors ${
+                  className={`w-full rounded-lg border bg-slate-50 px-4 py-3 transition-colors focus:outline-none focus:ring-2 focus:ring-[#1E40AF] ${
                     errors.mobileNumber
-                      ? "border-red-500 ring-1 ring-red-500"
+                      ? "border-red-500"
                       : "border-slate-200"
                   }`}
                 />
 
                 {errors.mobileNumber && (
-                  <p className="text-red-500 text-xs mt-1 font-bold">
+                  <p className="mt-1 text-xs font-bold text-red-500">
                     {errors.mobileNumber}
                   </p>
                 )}
               </div>
-
             </div>
           </div>
 
-          {/* SECTION 02 */}
+          {/* ====================================================
+              SECTION 02
+          ==================================================== */}
 
           <div className="space-y-6">
-
             <div className="border-b border-slate-200 pb-4">
-              <h2 className="text-sm font-bold text-[#1E40AF] tracking-wider uppercase mb-1">
+              <p className="mb-1 text-sm font-bold uppercase tracking-wider text-[#1E40AF]">
                 Section 02
-              </h2>
+              </p>
 
               <h3 className="text-2xl font-bold text-[#0F172A]">
                 Business Profile
               </h3>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-              {/* INDUSTRY */}
-
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {/* Industry */}
               <div>
-                <label className="block text-sm font-bold text-[#0F172A] mb-2">
+                <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                   Industry{" "}
                   <span className="text-red-500">*</span>
                 </label>
@@ -350,9 +380,9 @@ const BookDemoPage = () => {
                   name="industry"
                   value={formData.industry}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 bg-slate-50 border rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors appearance-none ${
+                  className={`w-full appearance-none rounded-lg border bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1E40AF] ${
                     errors.industry
-                      ? "border-red-500 ring-1 ring-red-500"
+                      ? "border-red-500"
                       : "border-slate-200"
                   }`}
                 >
@@ -380,24 +410,27 @@ const BookDemoPage = () => {
                   <option value="Food & Beverage">
                     Food & Beverage
                   </option>
-                  <option value="FMCG">FMCG</option>
+                  <option value="FMCG">
+                    FMCG
+                  </option>
                   <option value="Agriculture">
                     Agriculture
                   </option>
-                  <option value="Other">Other</option>
+                  <option value="Other">
+                    Other
+                  </option>
                 </select>
 
                 {errors.industry && (
-                  <p className="text-red-500 text-xs mt-1 font-bold">
+                  <p className="mt-1 text-xs font-bold text-red-500">
                     {errors.industry}
                   </p>
                 )}
               </div>
 
-              {/* COMPANY SIZE */}
-
+              {/* Company Size */}
               <div>
-                <label className="block text-sm font-bold text-[#0F172A] mb-2">
+                <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                   Company Size{" "}
                   <span className="text-red-500">*</span>
                 </label>
@@ -406,9 +439,9 @@ const BookDemoPage = () => {
                   name="companySize"
                   value={formData.companySize}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 bg-slate-50 border rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors appearance-none ${
+                  className={`w-full appearance-none rounded-lg border bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1E40AF] ${
                     errors.companySize
-                      ? "border-red-500 ring-1 ring-red-500"
+                      ? "border-red-500"
                       : "border-slate-200"
                   }`}
                 >
@@ -417,26 +450,21 @@ const BookDemoPage = () => {
                   </option>
                   <option value="1-10">1–10</option>
                   <option value="11-50">11–50</option>
-                  <option value="51-200">
-                    51–200
-                  </option>
-                  <option value="201-500">
-                    201–500
-                  </option>
+                  <option value="51-200">51–200</option>
+                  <option value="201-500">201–500</option>
                   <option value="500+">500+</option>
                 </select>
 
                 {errors.companySize && (
-                  <p className="text-red-500 text-xs mt-1 font-bold">
+                  <p className="mt-1 text-xs font-bold text-red-500">
                     {errors.companySize}
                   </p>
                 )}
               </div>
 
-              {/* WAREHOUSES */}
-
+              {/* Warehouses */}
               <div>
-                <label className="block text-sm font-bold text-[#0F172A] mb-2">
+                <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                   Number of Warehouses{" "}
                   <span className="text-red-500">*</span>
                 </label>
@@ -444,28 +472,25 @@ const BookDemoPage = () => {
                 <input
                   type="text"
                   name="numberOfWarehouses"
-                  value={
-                    formData.numberOfWarehouses
-                  }
+                  value={formData.numberOfWarehouses}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 bg-slate-50 border rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors ${
+                  className={`w-full rounded-lg border bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1E40AF] ${
                     errors.numberOfWarehouses
-                      ? "border-red-500 ring-1 ring-red-500"
+                      ? "border-red-500"
                       : "border-slate-200"
                   }`}
                 />
 
                 {errors.numberOfWarehouses && (
-                  <p className="text-red-500 text-xs mt-1 font-bold">
+                  <p className="mt-1 text-xs font-bold text-red-500">
                     {errors.numberOfWarehouses}
                   </p>
                 )}
               </div>
 
-              {/* AREA */}
-
+              {/* Warehouse Area */}
               <div>
-                <label className="block text-sm font-bold text-[#0F172A] mb-2">
+                <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                   Total Warehouse Area (sq ft/m){" "}
                   <span className="text-red-500">*</span>
                 </label>
@@ -473,28 +498,25 @@ const BookDemoPage = () => {
                 <input
                   type="text"
                   name="totalWarehouseArea"
-                  value={
-                    formData.totalWarehouseArea
-                  }
+                  value={formData.totalWarehouseArea}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 bg-slate-50 border rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors ${
+                  className={`w-full rounded-lg border bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1E40AF] ${
                     errors.totalWarehouseArea
-                      ? "border-red-500 ring-1 ring-red-500"
+                      ? "border-red-500"
                       : "border-slate-200"
                   }`}
                 />
 
                 {errors.totalWarehouseArea && (
-                  <p className="text-red-500 text-xs mt-1 font-bold">
+                  <p className="mt-1 text-xs font-bold text-red-500">
                     {errors.totalWarehouseArea}
                   </p>
                 )}
               </div>
 
-              {/* COUNTRY */}
-
+              {/* Country */}
               <div>
-                <label className="block text-sm font-bold text-[#0F172A] mb-2">
+                <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                   Country{" "}
                   <span className="text-red-500">*</span>
                 </label>
@@ -504,24 +526,23 @@ const BookDemoPage = () => {
                   name="country"
                   value={formData.country}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 bg-slate-50 border rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors ${
+                  className={`w-full rounded-lg border bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1E40AF] ${
                     errors.country
-                      ? "border-red-500 ring-1 ring-red-500"
+                      ? "border-red-500"
                       : "border-slate-200"
                   }`}
                 />
 
                 {errors.country && (
-                  <p className="text-red-500 text-xs mt-1 font-bold">
+                  <p className="mt-1 text-xs font-bold text-red-500">
                     {errors.country}
                   </p>
                 )}
               </div>
 
-              {/* STATE */}
-
+              {/* State */}
               <div>
-                <label className="block text-sm font-bold text-[#0F172A] mb-2">
+                <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                   State / Region
                 </label>
 
@@ -530,14 +551,13 @@ const BookDemoPage = () => {
                   name="stateRegion"
                   value={formData.stateRegion}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors"
+                  className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1E40AF]"
                 />
               </div>
 
-              {/* CITY */}
-
+              {/* City */}
               <div>
-                <label className="block text-sm font-bold text-[#0F172A] mb-2">
+                <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                   City
                 </label>
 
@@ -546,42 +566,40 @@ const BookDemoPage = () => {
                   name="city"
                   value={formData.city}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors"
+                  className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1E40AF]"
                 />
               </div>
-
             </div>
           </div>
 
-          {/* SECTION 03 */}
+          {/* ====================================================
+              SECTION 03
+          ==================================================== */}
 
           <div className="space-y-6">
-
             <div className="border-b border-slate-200 pb-4">
-              <h2 className="text-sm font-bold text-[#1E40AF] tracking-wider uppercase mb-1">
+              <p className="mb-1 text-sm font-bold uppercase tracking-wider text-[#1E40AF]">
                 Section 03
-              </h2>
+              </p>
 
               <h3 className="text-2xl font-bold text-[#0F172A]">
                 Warehouse Operations
               </h3>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {/* Current Management */}
               <div className="md:col-span-2">
-                <label className="block text-sm font-bold text-[#0F172A] mb-2">
+                <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                   How do you currently manage warehouse
                   operations?
                 </label>
 
                 <select
                   name="currentManagement"
-                  value={
-                    formData.currentManagement
-                  }
+                  value={formData.currentManagement}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors appearance-none"
+                  className="w-full appearance-none rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1E40AF]"
                 >
                   <option value="">
                     Select option
@@ -599,46 +617,43 @@ const BookDemoPage = () => {
                   <option value="Manual / Paper">
                     Manual / Paper
                   </option>
-                  <option value="Other">
-                    Other
-                  </option>
+                  <option value="Other">Other</option>
                 </select>
               </div>
 
+              {/* Daily Orders */}
               <div>
-                <label className="block text-sm font-bold text-[#0F172A] mb-2">
+                <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                   Average daily orders
                 </label>
 
                 <input
                   type="text"
                   name="averageDailyOrders"
-                  value={
-                    formData.averageDailyOrders
-                  }
+                  value={formData.averageDailyOrders}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors"
+                  className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1E40AF]"
                 />
               </div>
 
+              {/* Daily Receiving */}
               <div>
-                <label className="block text-sm font-bold text-[#0F172A] mb-2">
+                <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                   Average daily receiving volume
                 </label>
 
                 <input
                   type="text"
                   name="averageDailyReceiving"
-                  value={
-                    formData.averageDailyReceiving
-                  }
+                  value={formData.averageDailyReceiving}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors"
+                  className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1E40AF]"
                 />
               </div>
 
+              {/* Employees */}
               <div>
-                <label className="block text-sm font-bold text-[#0F172A] mb-2">
+                <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                   Number of warehouse employees
                 </label>
 
@@ -649,12 +664,13 @@ const BookDemoPage = () => {
                     formData.numberOfWarehouseEmployees
                   }
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors"
+                  className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1E40AF]"
                 />
               </div>
 
+              {/* Users */}
               <div>
-                <label className="block text-sm font-bold text-[#0F172A] mb-2">
+                <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                   Number of warehouse users
                   (software access)
                 </label>
@@ -666,21 +682,21 @@ const BookDemoPage = () => {
                     formData.numberOfWarehouseUsers
                   }
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors"
+                  className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1E40AF]"
                 />
               </div>
-
             </div>
           </div>
 
-          {/* SECTION 04 */}
+          {/* ====================================================
+              SECTION 04
+          ==================================================== */}
 
           <div className="space-y-6">
-
             <div className="border-b border-slate-200 pb-4">
-              <h2 className="text-sm font-bold text-[#1E40AF] tracking-wider uppercase mb-1">
+              <p className="mb-1 text-sm font-bold uppercase tracking-wider text-[#1E40AF]">
                 Section 04
-              </h2>
+              </p>
 
               <h3 className="text-2xl font-bold text-[#0F172A]">
                 Requirements
@@ -688,97 +704,89 @@ const BookDemoPage = () => {
             </div>
 
             <div>
-
-              <label className="block text-sm font-bold text-[#0F172A] mb-4">
+              <label className="mb-4 block text-sm font-bold text-[#0F172A]">
                 What are you looking for?
               </label>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
+                {requirementsList.map((requirement) => {
+                  const selected =
+                    formData.requirements.includes(
+                      requirement
+                    );
 
-                {requirementsList.map(
-                  (requirement) => (
+                  return (
                     <label
                       key={requirement}
-                      className={`flex items-center gap-3 p-3 border rounded-lg cursor-pointer transition-colors ${
-                        formData.requirements.includes(
-                          requirement
-                        )
-                          ? "bg-blue-50 border-[#1E40AF] text-[#1E40AF]"
-                          : "bg-white border-slate-200 text-slate-700 hover:bg-slate-50"
+                      className={`flex cursor-pointer items-center gap-3 rounded-lg border p-3 transition-colors ${
+                        selected
+                          ? "border-[#1E40AF] bg-blue-50 text-[#1E40AF]"
+                          : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
                       }`}
                     >
-
                       <input
                         type="checkbox"
-                        checked={formData.requirements.includes(
-                          requirement
-                        )}
+                        checked={selected}
                         onChange={() =>
                           handleRequirementToggle(
                             requirement
                           )
                         }
-                        className="w-4 h-4 text-[#1E40AF] rounded focus:ring-[#1E40AF] border-slate-300"
+                        className="h-4 w-4 rounded border-slate-300 text-[#1E40AF] focus:ring-[#1E40AF]"
                       />
 
                       <span className="text-sm font-bold">
                         {requirement}
                       </span>
-
                     </label>
-                  )
-                )}
-
+                  );
+                })}
               </div>
             </div>
 
+            {/* Operational Challenges */}
             <div>
-
-              <label className="block text-sm font-bold text-[#0F172A] mb-2">
+              <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                 Current operational challenges
               </label>
 
               <textarea
                 name="operationalChallenges"
-                value={
-                  formData.operationalChallenges
-                }
+                value={formData.operationalChallenges}
                 onChange={handleInputChange}
                 rows={4}
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors"
                 placeholder="Describe the main challenges you are facing today..."
+                className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1E40AF]"
               />
-
             </div>
           </div>
 
-          {/* SECTION 05 */}
+          {/* ====================================================
+              SECTION 05
+          ==================================================== */}
 
           <div className="space-y-6">
-
             <div className="border-b border-slate-200 pb-4">
-              <h2 className="text-sm font-bold text-[#1E40AF] tracking-wider uppercase mb-1">
+              <p className="mb-1 text-sm font-bold uppercase tracking-wider text-[#1E40AF]">
                 Section 05
-              </h2>
+              </p>
 
               <h3 className="text-2xl font-bold text-[#0F172A]">
                 Implementation
               </h3>
             </div>
 
+            {/* Timeline */}
             <div>
-
-              <label className="block text-sm font-bold text-[#0F172A] mb-2">
+              <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                 Expected implementation timeline
               </label>
 
               <select
                 name="implementationTimeline"
-                value={
-                  formData.implementationTimeline
-                }
+                value={formData.implementationTimeline}
                 onChange={handleInputChange}
-                className="w-full md:w-1/2 px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors appearance-none"
+                className="w-full appearance-none rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1E40AF] md:w-1/2"
               >
                 <option value="">
                   Select timeline
@@ -799,60 +807,51 @@ const BookDemoPage = () => {
                   Exploring
                 </option>
               </select>
-
             </div>
 
+            {/* Additional Requirements */}
             <div>
-
-              <label className="block text-sm font-bold text-[#0F172A] mb-2">
+              <label className="mb-2 block text-sm font-bold text-[#0F172A]">
                 Additional requirements
               </label>
 
               <textarea
                 name="additionalRequirements"
-                value={
-                  formData.additionalRequirements
-                }
+                value={formData.additionalRequirements}
                 onChange={handleInputChange}
                 rows={4}
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#1E40AF] transition-colors"
                 placeholder="Any other specific integrations, compliance needs, or constraints?"
+                className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1E40AF]"
               />
-
             </div>
-
           </div>
 
-          {/* SUBMIT */}
+          {/* ====================================================
+              SUBMIT
+          ==================================================== */}
 
-          <div className="pt-6 border-t border-slate-200 flex justify-end">
-
+          <div className="flex justify-end border-t border-slate-200 pt-6">
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full md:w-auto px-8 py-4 bg-[#1E40AF] text-white font-bold rounded-lg hover:bg-[#2563EB] transition-colors shadow-lg flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#1E40AF] px-8 py-4 font-bold text-white shadow-lg transition-colors hover:bg-[#2563EB] disabled:cursor-not-allowed disabled:opacity-70 md:w-auto"
             >
-
               {isSubmitting ? (
                 <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
+                  <Loader2 className="h-5 w-5 animate-spin" />
                   Processing...
                 </>
               ) : (
                 <>
                   Submit Request
-                  <ArrowRight className="w-5 h-5" />
+                  <ArrowRight className="h-5 w-5" />
                 </>
               )}
-
             </button>
-
           </div>
-
         </form>
-
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 
