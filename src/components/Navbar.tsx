@@ -267,7 +267,7 @@ export const Navbar: React.FC = () => {
 
          <div className="flex items-center gap-3 shrink-0 z-50 relative">
            <a
-             href="https://demo.acrelywms.com"
+             href="/book-demo"
              target="_blank"
              rel="noopener noreferrer"
              className="hidden sm:inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-md bg-[#1E40AF] px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#2563EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E40AF]/30 focus-visible:ring-offset-2"
@@ -385,7 +385,7 @@ export const Navbar: React.FC = () => {
 
          <div className="pt-2 pb-6">
            <a
-             href="https://demo.acrelywms.com"
+             href="/book-demo"
              target="_blank"
              rel="noopener noreferrer"
              onClick={() => setIsMobileMenuOpen(false)}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookDemoSection } from '../components/BookDemoSection';
+import { BookDemoSection } from '../components/docs/BookDemoSection';
 
 export const SecurityPage: React.FC = () => {
   const faqSections = [

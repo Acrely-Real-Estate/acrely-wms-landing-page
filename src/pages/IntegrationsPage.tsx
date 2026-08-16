@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight, Code, Database, Webhook, FileSpreadsheet, Server, Building2, ShoppingCart, CheckCircle2, Clock, Calendar, ArrowDown } from 'lucide-react';
-import { BookDemoSection } from '../components/BookDemoSection';
+import { BookDemoSection } from '../components/docs/BookDemoSection';
 
 export const IntegrationsPage: React.FC = () => {
   const categories = [

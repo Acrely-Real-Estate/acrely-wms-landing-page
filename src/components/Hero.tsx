@@ -61,8 +61,13 @@ export const Hero: React.FC = () => {
                 rel="noopener noreferrer"
                 className="px-8 py-4 rounded-lg bg-[#1E40AF] hover:bg-[#2563EB] text-white font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer"
               >
-                <span>Book a Demo</span>
-                <ArrowRight className="w-4 h-4" />
+                <Link
+  to="/book-demo"
+  className="flex items-center gap-2"
+>
+  <span>Book a Demo</span>
+  <ArrowRight className="w-4 h-4" />
+</Link>
               </a>
 
               {/* Secondary CTA */}

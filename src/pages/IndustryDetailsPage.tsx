@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
 import { Factory, Truck, Snowflake, Store, Warehouse, Coffee, Package, Wheat, ArrowRight, CheckCircle2, LayoutGrid, Workflow } from 'lucide-react';
-import { BookDemoSection } from '../components/BookDemoSection';
+import { BookDemoSection } from '../components/docs/BookDemoSection';
 
 const industryContent = {
   'warehousing': {

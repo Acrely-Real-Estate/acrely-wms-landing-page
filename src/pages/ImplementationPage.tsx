@@ -1,5 +1,6 @@
 import React from 'react';
-import { BookDemoSection } from '../components/BookDemoSection';
+import { BookDemoSection } from '../components/docs/BookDemoSection';
+
 import { ArrowDown, CheckCircle2, Search, Database, Box, Map, Users, Barcode, GraduationCap, Rocket } from 'lucide-react';
 
 export const ImplementationPage: React.FC = () => {
@@ -88,11 +89,13 @@ export const ImplementationPage: React.FC = () => {
         <div className="space-y-4 relative">
           <div className="absolute left-8 top-8 bottom-8 w-1 bg-blue-100 rounded-full hidden md:block"></div>
           
-          {steps.map((step, index) => (
+          {steps.map((step, index) => {
+            const Icon = step.icon;
+            return (
             <div key={index} className="relative flex flex-col md:flex-row gap-6 md:gap-12 p-6 md:p-8 bg-white border border-[#E5E7EB] rounded-2xl shadow-sm hover:border-[#1E40AF] transition-colors z-10 group">
               <div className="flex flex-col items-center shrink-0">
                 <div className="w-16 h-16 bg-blue-50 text-[#1E40AF] rounded-2xl flex items-center justify-center border-2 border-white shadow-md z-10 group-hover:bg-[#1E40AF] group-hover:text-white transition-colors">
-                  <step.icon className="w-8 h-8" />
+                  <Icon className="w-8 h-8" />
                 </div>
                 <div className="mt-4 px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-widest rounded-full">
                   {step.duration}
@@ -129,7 +132,8 @@ export const ImplementationPage: React.FC = () => {
                 </div>
               </div>
             </div>
-          ))}
+            )
+          })}
         </div>
       </div>
       
