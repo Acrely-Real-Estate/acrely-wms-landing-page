@@ -5,7 +5,7 @@ import { OperationalWorkflow } from '../components/OperationalWorkflow';
 import { ZetaSection } from '../components/ZetaSection';
 import { IndustriesSection } from '../components/IndustriesSection';
 import { ROICalculatorSection } from '../components/ROICalculatorSection';
-import { BookDemoSection } from '../components/BookDemoSection';
+import { BookDemoSection } from '../components/docs/BookDemoSection';
 
 export const LandingPage: React.FC = () => {
   return (
