@@ -28,14 +28,12 @@ export const Footer: React.FC = () => {
                 <span>info@acrelywms.com</span>
               </a>
 
-              <a
-                href="https://demo.acrelywms.com"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/book-demo"
                 className="inline-flex items-center gap-1.5 rounded-md bg-[#1E40AF] px-4 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#2563EB]"
               >
                 <span>Book a Demo</span>
-              </a>
+              </Link>
             </div>
           </div>
 

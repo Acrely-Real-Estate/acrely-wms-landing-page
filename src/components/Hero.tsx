@@ -90,7 +90,7 @@ export const Hero: React.FC = () => {
                 <div className="flex-1 flex justify-center">
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white border border-slate-200 text-[10px] font-mono text-slate-500 shadow-xs">
                     <Lock className="w-3 h-3 text-slate-400" />
-                    app.acrelywms.com
+                    demo.acrelywms.com
                   </div>
                 </div>
               </div>

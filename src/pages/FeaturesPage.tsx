@@ -88,15 +88,13 @@ export const FeaturesPage: React.FC = () => {
           <h2 className="text-4xl font-extrabold mb-6">Ready to modernize your warehouse operations?</h2>
           <p className="text-blue-200 text-lg mb-10">Join leading enterprise operators scaling their business with Acrely WMS.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="https://demo.acrelywms.com"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/book-demo"
               className="w-full sm:w-auto px-8 py-4 bg-white text-[#1E40AF] font-bold text-sm rounded-lg hover:bg-slate-50 transition-colors shadow-lg flex items-center justify-center gap-2"
             >
               <span>Book a Demo</span>
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </Link>
             <a
               href="https://demo.acrelywms.com"
               target="_blank"

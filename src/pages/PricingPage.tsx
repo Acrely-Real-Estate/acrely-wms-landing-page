@@ -76,14 +76,12 @@ const PlanCard: React.FC<PlanProps> = ({
             {cta}
           </Link>
           {ctaSecondary && (
-            <a
-              href="https://demo.acrelywms.com"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/book-demo"
               className="w-full py-3.5 px-4 rounded-lg font-bold text-sm bg-white border border-[#E5E7EB] text-[#0F172A] hover:bg-slate-50 transition-colors flex items-center justify-center gap-2"
             >
               {ctaSecondary}
-            </a>
+            </Link>
           )}
         </div>
       </div>
@@ -575,22 +573,18 @@ export const PricingPage: React.FC = () => {
             Our team can help you determine the right plan for your warehouse network, discuss implementation requirements, or configure a custom Enterprise package.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a
-              href="https://demo.acrelywms.com"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/contact"
               className="px-8 py-4 bg-white text-[#0F172A] font-bold rounded-lg hover:bg-slate-100 transition-colors shadow-sm"
             >
               Contact Sales
-            </a>
-            <a
-              href="https://demo.acrelywms.com"
-              target="_blank"
-              rel="noopener noreferrer"
+            </Link>
+            <Link
+              to="/book-demo"
               className="px-8 py-4 bg-transparent text-white border border-slate-700 font-bold rounded-lg hover:bg-slate-800 transition-colors"
             >
               Book Enterprise Demo
-            </a>
+            </Link>
           </div>
         </div>
 

@@ -230,14 +230,12 @@ export const AboutPage: React.FC = () => {
               </p>
               
               <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                <a
-                  href="https://demo.acrelywms.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  to="/book-demo"
                   className="px-6 py-3.5 rounded-md bg-[#1E40AF] hover:bg-[#2563EB] text-white font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer"
                 >
                   Book a Demo
-                </a>
+                </Link>
                 <a
                   href="https://demo.acrelywms.com"
                   target="_blank"
@@ -640,15 +638,13 @@ export const AboutPage: React.FC = () => {
           </p>
           
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="https://demo.acrelywms.com"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/book-demo"
               className="w-full sm:w-auto px-8 py-3.5 bg-[#1E40AF] text-white font-bold rounded-md hover:bg-[#2563EB] transition-colors shadow-lg text-sm flex items-center justify-center gap-2"
             >
               Book a Demo
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </Link>
             <Link
               to="/features"
               className="w-full sm:w-auto px-8 py-3.5 bg-slate-800 text-slate-200 border border-slate-700/80 font-bold rounded-md hover:bg-slate-750 hover:text-white transition-colors text-sm flex items-center justify-center"
