@@ -20,12 +20,14 @@ export const ZetaSection: React.FC = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link 
-                to="/product-tour"
+              <a 
+                href="https://demo.acrelywms.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex justify-center items-center gap-2 px-8 py-3.5 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
               >
-                Explore Zeta <ArrowRight className="w-4 h-4" />
-              </Link>
+                Explore the Platform (Beta) <ArrowRight className="w-4 h-4" />
+              </a>
               <Link 
                 to="/pricing"
                 className="inline-flex justify-center items-center gap-2 px-8 py-3.5 bg-white/5 text-white font-bold rounded-lg hover:bg-white/10 transition-colors border border-white/10"

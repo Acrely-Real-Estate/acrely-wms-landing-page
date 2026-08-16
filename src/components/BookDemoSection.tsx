@@ -11,13 +11,15 @@ export const BookDemoSection: React.FC = () => {
           See how Acrely WMS can fit your warehouse operations.
         </h2>
         <div className="flex justify-center mt-8">
-          <Link
-            to="/book-demo"
+          <a
+            href="https://demo.acrelywms.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-4 bg-[#1E40AF] text-white font-bold rounded-lg hover:bg-[#2563EB] transition-colors shadow-lg"
           >
             Book a Demo
             <ArrowRight className="w-5 h-5" />
-          </Link>
+          </a>
         </div>
       </div>
     </div>
