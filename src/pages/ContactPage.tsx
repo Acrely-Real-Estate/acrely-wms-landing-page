@@ -63,13 +63,15 @@ export const ContactPage: React.FC = () => {
           <p className="text-slate-400 max-w-xl mx-auto mb-8 text-lg">
             Schedule a personalized demonstration of our enterprise warehouse management platform.
           </p>
-          <Link
-            to="/book-demo"
+          <a
+            href="https://demo.acrelywms.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-4 bg-[#1E40AF] hover:bg-[#2563EB] text-white font-bold rounded-lg transition-colors shadow-lg"
           >
             <span>Book a Demo</span>
             <ArrowRight className="w-5 h-5" />
-          </Link>
+          </a>
         </div>
 
       </div>
