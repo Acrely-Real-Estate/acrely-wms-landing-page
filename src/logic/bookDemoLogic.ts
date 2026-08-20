@@ -175,7 +175,9 @@ export async function submitBookDemo(
 ) {
   const apiUrl =
     ((import.meta as any).env?.VITE_API_URL as string) ||
-    "https://wms-landing-backend.onrender.com";
+    (import.meta.env.PROD 
+      ? "https://wms-landing-backend.onrender.com" 
+      : "http://localhost:5000");
 
   const response = await fetch(
     `${apiUrl}/api/book-demo`,

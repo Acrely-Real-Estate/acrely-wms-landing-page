@@ -1,7 +1,6 @@
 import React from 'react';
 import { ArrowRight, Lock, CheckCircle2, QrCode, Building2, Users, Database, Zap, Smartphone, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import dashboardPreview from '../assets/dashboard-preview.jpg';
 
 export const Hero: React.FC = () => {
   const trustIndicators = [
@@ -99,7 +98,7 @@ export const Hero: React.FC = () => {
               {/* Dashboard Content Mockup */}
               <div className="flex-1 bg-slate-50 overflow-hidden flex relative">
                 <img 
-                  src={dashboardPreview} 
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" 
                   alt="Acrely WMS Dashboard Preview" 
                   className="w-full h-full object-cover object-left-top"
                 />
