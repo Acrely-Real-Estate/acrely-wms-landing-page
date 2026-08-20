@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, Lock, CheckCircle2, QrCode, Building2, Users, Database, Zap, Smartphone, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import dashboardPreview from '../assets/dashboard-preview.jpg';
 
 export const Hero: React.FC = () => {
   const trustIndicators = [
@@ -96,53 +97,12 @@ export const Hero: React.FC = () => {
               </div>
               
               {/* Dashboard Content Mockup */}
-              <div className="flex-1 bg-slate-50 p-3 sm:p-5 flex gap-4">
-                 {/* Sidebar Mockup */}
-                 <div className="w-1/4 bg-white rounded-xl border border-slate-200 p-3 hidden sm:flex flex-col gap-3 shadow-sm">
-                   <div className="h-4 w-2/3 bg-slate-200 rounded mb-4" />
-                   <div className="h-8 bg-blue-50 rounded-lg border border-blue-100" />
-                   <div className="h-8 bg-slate-50 rounded-lg" />
-                   <div className="h-8 bg-slate-50 rounded-lg" />
-                   <div className="h-8 bg-slate-50 rounded-lg" />
-                   <div className="h-8 bg-slate-50 rounded-lg" />
-                   <div className="mt-auto h-8 bg-slate-50 rounded-lg" />
-                 </div>
-                 
-                 {/* Main Content Mockup */}
-                 <div className="flex-1 flex flex-col gap-4">
-                   <div className="flex justify-between items-center">
-                     <div className="h-6 w-32 bg-slate-200 rounded" />
-                     <div className="h-8 w-24 bg-[#1E40AF] rounded-lg shadow-sm" />
-                   </div>
-                   {/* Stats Grid Mockup */}
-                   <div className="grid grid-cols-3 gap-3">
-                     {[1, 2, 3].map((i) => (
-                       <div key={i} className="bg-white rounded-xl border border-slate-200 p-4 shadow-sm flex flex-col gap-2">
-                         <div className="h-3 w-1/2 bg-slate-200 rounded" />
-                         <div className="h-6 w-3/4 bg-slate-800 rounded" />
-                       </div>
-                     ))}
-                   </div>
-                   {/* Table Mockup */}
-                   <div className="flex-1 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
-                     <div className="h-10 border-b border-slate-100 bg-slate-50 flex items-center px-2 sm:px-4 gap-2 sm:gap-4">
-                       <div className="h-3 w-6 sm:w-8 bg-slate-200 rounded shrink-0" />
-                       <div className="h-3 w-16 sm:w-20 bg-slate-200 rounded shrink-0" />
-                       <div className="h-3 w-16 bg-slate-200 rounded hidden sm:block shrink-0" />
-                       <div className="h-3 w-10 sm:w-12 bg-slate-200 rounded ml-auto shrink-0" />
-                     </div>
-                     <div className="flex-1 p-2 sm:p-4 flex flex-col gap-4">
-                       {[1, 2, 3, 4].map((i) => (
-                         <div key={i} className="flex items-center gap-2 sm:gap-4 border-b border-slate-50 pb-3 last:border-0 last:pb-0">
-                           <div className="h-3 w-6 sm:w-8 bg-slate-100 rounded shrink-0" />
-                           <div className="h-3 w-16 sm:w-24 bg-slate-100 rounded shrink-0" />
-                           <div className="h-3 w-20 sm:w-32 bg-slate-50 rounded hidden sm:block shrink-0" />
-                           <div className="h-4 w-10 sm:w-12 bg-emerald-100 rounded-full ml-auto shrink-0" />
-                         </div>
-                       ))}
-                     </div>
-                   </div>
-                 </div>
+              <div className="flex-1 bg-slate-50 overflow-hidden flex relative">
+                <img 
+                  src={dashboardPreview} 
+                  alt="Acrely WMS Dashboard Preview" 
+                  className="w-full h-full object-cover object-left-top"
+                />
               </div>
 
             </div>
