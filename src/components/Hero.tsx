@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, Lock, CheckCircle2, QrCode, Building2, Users, Database, Zap, Smartphone, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import dashboardImage from '../assets/hero-dashboard-app.png';
 
 export const Hero: React.FC = () => {
   const trustIndicators = [
@@ -76,35 +77,13 @@ export const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Dashboard Mockup */}
+          {/* Right Column: Dashboard Screenshot */}
           <div className="lg:col-span-6 relative">
-            <div className="relative rounded-2xl bg-white border border-[#E5E7EB] shadow-2xl overflow-hidden aspect-[4/3] flex flex-col -rotate-1 hover:rotate-0 transition-transform duration-500">
-              
-              {/* Fake Window Header */}
-              <div className="h-10 bg-slate-100 border-b border-[#E5E7EB] flex items-center px-4 gap-2">
-                <div className="flex gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
-                </div>
-                <div className="flex-1 flex justify-center">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white border border-slate-200 text-[10px] font-mono text-slate-500 shadow-xs">
-                    <Lock className="w-3 h-3 text-slate-400" />
-                    demo.acrelywms.com
-                  </div>
-                </div>
-              </div>
-              
-              {/* Dashboard Content Mockup */}
-              <div className="flex-1 bg-slate-50 overflow-hidden flex relative">
-                <img 
-                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" 
-                  alt="Acrely WMS Dashboard Preview" 
-                  className="w-full h-full object-cover object-left-top"
-                />
-              </div>
-
-            </div>
+            <img 
+              src={dashboardImage} 
+              alt="Acrely WMS Dashboard Preview" 
+              className="w-full h-auto -rotate-1 hover:rotate-0 transition-transform duration-500"
+            />
           </div>
 
         </div>

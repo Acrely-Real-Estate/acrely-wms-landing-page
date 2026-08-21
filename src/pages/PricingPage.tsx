@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Check, Sparkles, Users, Building2, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -6,44 +6,75 @@ interface PlanProps {
   name: string;
   badge?: string;
   price: number | 'Custom';
+  hasPromotion?: boolean;
   description: string;
   features: string[];
   cta: string;
   ctaSecondary?: string;
   isPopular?: boolean;
   ctaLink: string;
+  isSelected?: boolean;
+  onSelect?: () => void;
 }
 
 const PlanCard: React.FC<PlanProps> = ({ 
   name, 
   badge, 
   price, 
+  hasPromotion,
   description, 
   features, 
   cta, 
   ctaSecondary, 
   isPopular,
-  ctaLink
+  ctaLink,
+  isSelected,
+  onSelect
 }) => {
   return (
-    <div className={`relative flex flex-col bg-white rounded-2xl shadow-sm border ${isPopular ? 'border-[#1E40AF] shadow-md' : 'border-[#E5E7EB]'}`}>
+    <div 
+      className={`relative flex flex-col bg-white rounded-2xl border transition-all cursor-pointer ${
+        isSelected 
+          ? 'border-[#1E40AF] ring-2 ring-[#1E40AF] shadow-[0_8px_30px_rgb(0,0,0,0.12)] transform scale-[1.02] z-20' 
+          : isPopular 
+            ? 'border-blue-200 shadow-sm hover:shadow-md hover:border-blue-300 z-10' 
+            : 'border-[#E5E7EB] shadow-sm hover:shadow-md hover:border-blue-300 z-10'
+      }`}
+      onClick={onSelect}
+    >
       {isPopular && badge && (
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#1E40AF] text-white text-[10px] font-bold uppercase tracking-widest py-1 px-3 rounded-full whitespace-nowrap z-10">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#1E40AF] text-white text-[10px] font-bold uppercase tracking-widest py-1 px-3 rounded-full whitespace-nowrap z-30">
           {badge}
         </div>
       )}
       
       <div className={`p-5 sm:p-6 border-b ${isPopular ? 'border-blue-100 bg-blue-50/30 rounded-t-2xl' : 'border-[#E5E7EB]'}`}>
-        <h3 className="text-xl font-bold text-[#0F172A] mb-2">{name}</h3>
-        <div className="mb-2">
-          <span className="text-4xl font-extrabold text-[#0F172A]">
-            {typeof price === 'number' ? `$${price}` : price}
-          </span>
-          {typeof price === 'number' && (
-            <span className="text-[#64748B] text-sm font-medium ml-1">/ month</span>
+        <div className="flex justify-between items-start mb-4">
+          <h3 className="text-xl font-bold text-[#0F172A]">{name}</h3>
+          <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${isSelected ? 'border-[#1E40AF] bg-[#1E40AF]' : 'border-slate-300'}`}>
+            {isSelected && <Check className="w-3 h-3 text-white stroke-[3]" />}
+          </div>
+        </div>
+        <div className="mb-4 min-h-[70px] flex flex-col justify-center">
+          {price === 'Custom' ? (
+            <span className="text-4xl font-extrabold text-[#0F172A]">Custom</span>
+          ) : hasPromotion ? (
+            <div className="flex flex-col items-start gap-1">
+              <span className="text-[26px] sm:text-3xl xl:text-[26px] font-extrabold text-[#0F172A] leading-tight">
+                FREE FOR 1 MONTH
+              </span>
+              <span className="text-[#64748B] text-base font-medium line-through decoration-[#94A3B8]">
+                ${price} / month
+              </span>
+            </div>
+          ) : (
+            <div>
+              <span className="text-4xl font-extrabold text-[#0F172A]">${price}</span>
+              <span className="text-[#64748B] text-sm font-medium ml-1">/ month</span>
+            </div>
           )}
         </div>
-        <p className="text-[#475569] text-sm leading-relaxed min-h-[60px]">
+        <p className="text-[#475569] text-sm leading-relaxed min-h-[72px]">
           {description}
         </p>
       </div>
@@ -64,21 +95,22 @@ const PlanCard: React.FC<PlanProps> = ({
         </ul>
 
         <div className="flex flex-col gap-3 mt-auto">
-          <Link
-            to={ctaLink}
-            state={{ selectedPlan: name }}
+          <button
             className={`w-full py-3.5 px-4 rounded-lg font-bold text-sm transition-colors flex items-center justify-center gap-2 ${
-              isPopular
-                ? 'bg-[#1E40AF] text-white hover:bg-[#2563EB] shadow-md'
-                : 'bg-[#F1F5F9] text-[#0F172A] hover:bg-[#E2E8F0]'
+              isSelected
+                ? 'bg-[#1E40AF] text-white shadow-md'
+                : isPopular
+                  ? 'bg-blue-50 text-[#1E40AF] hover:bg-blue-100'
+                  : 'bg-[#F1F5F9] text-[#0F172A] hover:bg-[#E2E8F0]'
             }`}
           >
-            {cta}
-          </Link>
+            {isSelected ? 'Selected' : cta}
+          </button>
           {ctaSecondary && (
             <Link
               to="/book-demo"
               className="w-full py-3.5 px-4 rounded-lg font-bold text-sm bg-white border border-[#E5E7EB] text-[#0F172A] hover:bg-slate-50 transition-colors flex items-center justify-center gap-2"
+              onClick={(e) => e.stopPropagation()}
             >
               {ctaSecondary}
             </Link>
@@ -90,6 +122,34 @@ const PlanCard: React.FC<PlanProps> = ({
 };
 
 export const PricingPage: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<'plan' | 'addons'>('plan');
+  const [selectedPlan, setSelectedPlan] = useState<string>('Growth');
+  const [additionalUsers, setAdditionalUsers] = useState<number>(0);
+  const [additionalWarehouses, setAdditionalWarehouses] = useState<number>(0);
+  const [selectedZeta, setSelectedZeta] = useState<string>('none');
+
+  const PROMOTION_ACTIVE = true;
+
+  const PLAN_PRICING: Record<string, number | 'Custom'> = {
+    Free: 0,
+    Starter: 49,
+    Growth: 99,
+    Professional: 149,
+    Enterprise: 'Custom'
+  };
+
+  const ADDON_PRICING = {
+    user: 6,
+    warehouse: 150
+  };
+
+  const ZETA_PACKAGES = [
+    { id: 'none', label: 'No additional credits', price: 0 },
+    { id: '1k', label: '1,000 credits', price: 10 },
+    { id: '3k', label: '3,000 credits', price: 25 },
+    { id: '10k', label: '10,000 credits', price: 60 },
+  ];
+
   const featuresData = [
     {
       category: "Zeta Warehouse Intelligence",
@@ -224,8 +284,22 @@ export const PricingPage: React.FC = () => {
     return <span className="font-medium text-sm text-[#334155]">{value}</span>;
   };
 
+  const handlePlanSelect = (plan: string) => {
+    setSelectedPlan(plan);
+    if (activeTab === 'addons') {
+      setActiveTab('plan');
+    }
+  };
+
+  const basePrice = PLAN_PRICING[selectedPlan];
+  const isCustom = basePrice === 'Custom';
+  const addonsTotal = (additionalUsers * ADDON_PRICING.user) + 
+                      (additionalWarehouses * ADDON_PRICING.warehouse) + 
+                      (ZETA_PACKAGES.find(p => p.id === selectedZeta)?.price || 0);
+  const totalMonthly = isCustom ? 'Custom' : (basePrice as number) + addonsTotal;
+
   return (
-    <div className="bg-slate-50 pt-24 pb-12">
+    <div className="bg-slate-50 pt-24 pb-48">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -239,268 +313,349 @@ export const PricingPage: React.FC = () => {
           </p>
         </div>
 
-        {/* Pricing Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-20">
-          <PlanCard 
-            name="Free"
-            price={0}
-            description="Explore Acrely WMS with a limited environment designed for evaluation and very small operations."
-            features={[
-              "1 user",
-              "1 warehouse",
-              "Product & SKU management",
-              "Basic inventory visibility",
-              "Basic barcode scanning",
-              "Basic receiving",
-              "Basic stock movements",
-              "Basic dashboard",
-              "Limited reports",
-              "Demo/sample data",
-              "Zeta Not included"
-            ]}
-            cta="Get Started"
-            ctaLink="/download"
-          />
-          <PlanCard 
-            name="Starter"
-            price={49}
-            description="Core warehouse management for small teams moving beyond spreadsheets and basic inventory tools."
-            features={[
-              "2 users",
-              "1 warehouse",
-              "Product & SKU management",
-              "Inventory management",
-              "Barcode scanning",
-              "Receiving",
-              "Basic putaway",
-              "Stock transfers",
-              "Cycle counting",
-              "Basic picking",
-              "Basic packing",
-              "Basic dispatch",
-              "Basic reports",
-              "User roles",
-              "Standard support",
-              "Zeta Limited allocation"
-            ]}
-            cta="Request Access"
-            ctaLink="/contact"
-          />
-          <PlanCard 
-            name="Growth"
-            badge="Most Popular"
-            isPopular={true}
-            price={99}
-            description="Complete warehouse workflows for growing operations that need stronger control, traceability, and process discipline."
-            features={[
-              "5 users",
-              "Up to 3 warehouses",
-              "Everything in Starter",
-              "Purchase orders",
-              "Advanced receiving",
-              "Directed putaway",
-              "Bin & location management",
-              "Batch / lot tracking",
-              "Expiry tracking",
-              "Advanced barcode workflows",
-              "Picking workflows",
-              "Packing workflows",
-              "Dispatch management",
-              "Returns",
-              "Cycle counting",
-              "Stock adjustments",
-              "Transfer orders",
-              "Operational dashboards",
-              "Advanced reports",
-              "API access",
-              "Mobile warehouse workflows",
-              "Role-based permissions",
-              "Priority support",
-              "Zeta 1,000 credits/month"
-            ]}
-            cta="Request Access"
-            ctaLink="/contact"
-          />
-          <PlanCard 
-            name="Professional"
-            price={149}
-            description="Advanced control for complex and multi-warehouse operations requiring deeper inventory control, automation, analytics, and governance."
-            features={[
-              "10 users",
-              "Multiple warehouses",
-              "Everything in Growth",
-              "Advanced warehouse configuration",
-              "Advanced inventory controls",
-              "Advanced barcode workflows",
-              "Batch / lot / serial tracking",
-              "Advanced picking strategies",
-              "Wave / batch picking",
-              "Advanced packing workflows",
-              "Advanced returns",
-              "Approval workflows",
-              "Advanced role-based access control",
-              "Custom operational workflows",
-              "Advanced analytics",
-              "Executive reporting",
-              "Audit logs",
-              "Advanced API capabilities",
-              "Integration tools",
-              "Data export",
-              "Priority support",
-              "Zeta 3,000 credits/month"
-            ]}
-            cta="Request Access"
-            ctaLink="/contact"
-          />
-          <PlanCard 
-            name="Enterprise"
-            price="Custom"
-            description="Built around your warehouse network, integration requirements, security model, operating model, and deployment requirements."
-            features={[
-              "Custom users",
-              "Custom warehouse count",
-              "Everything in Professional",
-              "Enterprise integrations",
-              "ERP / WMS integrations",
-              "Custom API integrations",
-              "Data migration assistance",
-              "Custom workflows",
-              "SSO",
-              "Advanced security controls",
-              "Enterprise audit capabilities",
-              "Dedicated onboarding",
-              "Dedicated account management",
-              "Priority / enterprise support",
-              "SLA options",
-              "Custom deployment requirements",
-              "Custom reporting",
-              "Contract-based commercial terms",
-              "Zeta Custom allocation"
-            ]}
-            cta="Talk to Sales"
-            ctaSecondary="Book Enterprise Demo"
-            ctaLink="/contact"
-          />
+        {/* Two-Tab Configurator Header */}
+        <div className="max-w-[600px] mx-auto mb-10">
+          <div className="flex bg-slate-200/50 p-1.5 rounded-xl border border-slate-200">
+            <button
+              onClick={() => setActiveTab('plan')}
+              className={`flex-1 py-3 px-6 text-sm sm:text-base font-bold rounded-lg transition-all ${
+                activeTab === 'plan' 
+                  ? 'bg-white text-[#0F172A] shadow-sm border border-slate-200' 
+                  : 'text-[#64748B] hover:text-[#0F172A]'
+              }`}
+            >
+              Plan & Pricing
+            </button>
+            <button
+              onClick={() => setActiveTab('addons')}
+              className={`flex-1 py-3 px-6 text-sm sm:text-base font-bold rounded-lg transition-all ${
+                activeTab === 'addons' 
+                  ? 'bg-white text-[#0F172A] shadow-sm border border-slate-200' 
+                  : 'text-[#64748B] hover:text-[#0F172A]'
+              }`}
+            >
+              Add-ons & Capacity
+            </button>
+          </div>
         </div>
 
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Zeta Intelligence Section */}
-        <div className="bg-[#0F172A] rounded-2xl border border-slate-800 p-8 sm:p-12 mb-20 text-white shadow-lg overflow-hidden relative">
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-900/30 to-transparent pointer-events-none"></div>
-          
-          <div className="grid lg:grid-cols-2 gap-12 relative z-10">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-wider mb-6 border border-blue-500/20">
-                <Sparkles className="w-3.5 h-3.5" />
-                Zeta Warehouse Intelligence
-              </div>
-              <h2 className="text-3xl font-bold mb-4">Ask your warehouse questions in plain language.</h2>
-              <p className="text-slate-400 text-lg leading-relaxed mb-10">
-                Zeta is Acrely WMS's warehouse intelligence layer. Authorized users can ask operational questions in natural language and receive AI-assisted analysis using the warehouse data available to their account.
-              </p>
-
-              <div className="bg-slate-800/80 rounded-xl p-6 border border-slate-700 mb-8">
-                <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Example questions</div>
-                <div className="space-y-3">
-                  <div className="bg-slate-900/80 p-3 rounded-lg border border-slate-700 text-sm text-slate-300">"How many Fresh Apples are currently available?"</div>
-                  <div className="bg-slate-900/80 p-3 rounded-lg border border-slate-700 text-sm text-slate-300">"Which products are approaching expiry?"</div>
-                  <div className="bg-slate-900/80 p-3 rounded-lg border border-slate-700 text-sm text-slate-300">"Summarize today's receiving activity."</div>
-                  <div className="bg-slate-900/80 p-3 rounded-lg border border-slate-700 text-sm text-slate-300">"Which warehouse has the highest stock variance this week?"</div>
-                  <div className="bg-slate-900/80 p-3 rounded-lg border border-slate-700 text-sm text-slate-300">"Show unusual inventory movements across our warehouses."</div>
-                  <div className="text-[10px] text-amber-500/80 font-bold tracking-widest uppercase mt-4">DEMONSTRATION EXAMPLES</div>
-                </div>
-              </div>
+        {/* Content Area */}
+        <div className="mb-20">
+          {/* Tab 1: Plan & Pricing */}
+          <div className={`${activeTab === 'plan' ? 'block' : 'hidden'}`}>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+              <PlanCard 
+                name="Free"
+                price={0}
+                hasPromotion={false}
+                description="Explore Acrely WMS with a limited environment designed for evaluation and very small operations."
+                features={[
+                  "1 user",
+                  "1 warehouse",
+                  "Product & SKU management",
+                  "Basic inventory visibility",
+                  "Basic barcode scanning",
+                  "Basic receiving",
+                  "Basic stock movements",
+                  "Basic dashboard",
+                  "Limited reports",
+                  "Demo/sample data",
+                  "Zeta Not included"
+                ]}
+                cta="Get Started"
+                ctaLink="/download"
+                isSelected={selectedPlan === 'Free'}
+                onSelect={() => handlePlanSelect('Free')}
+              />
+              <PlanCard 
+                name="Starter"
+                price={49}
+                hasPromotion={PROMOTION_ACTIVE}
+                description="Core warehouse management for small teams moving beyond spreadsheets and basic inventory tools."
+                features={[
+                  "2 users",
+                  "1 warehouse",
+                  "Product & SKU management",
+                  "Inventory management",
+                  "Barcode scanning",
+                  "Receiving",
+                  "Basic putaway",
+                  "Stock transfers",
+                  "Cycle counting",
+                  "Basic picking",
+                  "Basic packing",
+                  "Basic dispatch",
+                  "Basic reports",
+                  "User roles",
+                  "Standard support",
+                  "Zeta Limited allocation"
+                ]}
+                cta="Request Access"
+                ctaLink="/contact"
+                isSelected={selectedPlan === 'Starter'}
+                onSelect={() => handlePlanSelect('Starter')}
+              />
+              <PlanCard 
+                name="Growth"
+                badge="Most Popular"
+                isPopular={true}
+                price={99}
+                hasPromotion={PROMOTION_ACTIVE}
+                description="Complete warehouse workflows for growing operations that need stronger control, traceability, and process discipline."
+                features={[
+                  "5 users",
+                  "Up to 3 warehouses",
+                  "Everything in Starter",
+                  "Purchase orders",
+                  "Advanced receiving",
+                  "Directed putaway",
+                  "Bin & location management",
+                  "Batch / lot tracking",
+                  "Expiry tracking",
+                  "Advanced barcode workflows",
+                  "Picking workflows",
+                  "Packing workflows",
+                  "Dispatch management",
+                  "Returns",
+                  "Cycle counting",
+                  "Stock adjustments",
+                  "Transfer orders",
+                  "Operational dashboards",
+                  "Advanced reports",
+                  "API access",
+                  "Mobile warehouse workflows",
+                  "Role-based permissions",
+                  "Priority support",
+                  "Zeta 1,000 credits/month"
+                ]}
+                cta="Request Access"
+                ctaLink="/contact"
+                isSelected={selectedPlan === 'Growth'}
+                onSelect={() => handlePlanSelect('Growth')}
+              />
+              <PlanCard 
+                name="Professional"
+                price={149}
+                hasPromotion={PROMOTION_ACTIVE}
+                description="Advanced control for complex and multi-warehouse operations requiring deeper inventory control, automation, analytics, and governance."
+                features={[
+                  "10 users",
+                  "Multiple warehouses",
+                  "Everything in Growth",
+                  "Advanced warehouse configuration",
+                  "Advanced inventory controls",
+                  "Advanced barcode workflows",
+                  "Batch / lot / serial tracking",
+                  "Advanced picking strategies",
+                  "Wave / batch picking",
+                  "Advanced packing workflows",
+                  "Advanced returns",
+                  "Approval workflows",
+                  "Advanced role-based access control",
+                  "Custom operational workflows",
+                  "Advanced analytics",
+                  "Executive reporting",
+                  "Audit logs",
+                  "Advanced API capabilities",
+                  "Integration tools",
+                  "Data export",
+                  "Priority support",
+                  "Zeta 3,000 credits/month"
+                ]}
+                cta="Request Access"
+                ctaLink="/contact"
+                isSelected={selectedPlan === 'Professional'}
+                onSelect={() => handlePlanSelect('Professional')}
+              />
+              <PlanCard 
+                name="Enterprise"
+                price="Custom"
+                hasPromotion={false}
+                description="Built around your warehouse network, integration requirements, security model, operating model, and deployment requirements."
+                features={[
+                  "Custom users",
+                  "Custom warehouse count",
+                  "Everything in Professional",
+                  "Enterprise integrations",
+                  "ERP / WMS integrations",
+                  "Custom API integrations",
+                  "Data migration assistance",
+                  "Custom workflows",
+                  "SSO",
+                  "Advanced security controls",
+                  "Enterprise audit capabilities",
+                  "Dedicated onboarding",
+                  "Dedicated account management",
+                  "Priority / enterprise support",
+                  "SLA options",
+                  "Custom deployment requirements",
+                  "Custom reporting",
+                  "Contract-based commercial terms",
+                  "Zeta Custom allocation"
+                ]}
+                cta="Talk to Sales"
+                ctaSecondary="Book Enterprise Demo"
+                ctaLink="/contact"
+                isSelected={selectedPlan === 'Enterprise'}
+                onSelect={() => handlePlanSelect('Enterprise')}
+              />
             </div>
             
-            <div className="flex flex-col">
-              <div className="bg-slate-800/50 p-6 sm:p-8 rounded-xl border border-slate-700 mb-6">
-                <h3 className="text-sm text-slate-400 font-bold uppercase tracking-wider mb-6">Zeta Credit Packages</h3>
-                <div className="space-y-5">
-                  <div className="flex justify-between items-center border-b border-slate-700/50 pb-4">
-                    <span className="font-bold text-lg">1,000 credits</span>
-                    <div className="text-right">
-                      <span className="font-bold text-xl">$10</span>
-                      <span className="text-slate-400 text-sm"> / month</span>
-                    </div>
+            {/* Proceed to Add-ons Prompt */}
+            <div className="mt-12 text-center">
+              <p className="text-lg text-slate-500 mb-6">Need more capacity? Add users, warehouses, or Zeta credits without immediately changing your plan.</p>
+              <button 
+                onClick={() => setActiveTab('addons')}
+                className="px-8 py-4 bg-white border border-slate-200 text-[#0F172A] font-bold rounded-xl hover:bg-slate-50 transition-colors shadow-sm inline-flex items-center gap-2"
+              >
+                Configure Add-ons & Capacity
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          {/* Tab 2: Add-ons & Capacity */}
+          <div className={`${activeTab === 'addons' ? 'block' : 'hidden'}`}>
+            <div className="max-w-4xl mx-auto space-y-6">
+              
+              {/* Users Config */}
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8">
+                  <div>
+                    <h3 className="text-xl font-bold text-[#0F172A] flex items-center gap-2">
+                      <Users className="w-5 h-5 text-blue-600" />
+                      Additional Users
+                    </h3>
+                    <p className="text-sm text-slate-500 mt-1">Add more warehouse operators, supervisors, or managers to your plan.</p>
                   </div>
-                  <div className="flex justify-between items-center border-b border-slate-700/50 pb-4">
-                    <span className="font-bold text-lg">3,000 credits</span>
-                    <div className="text-right">
-                      <span className="font-bold text-xl">$25</span>
-                      <span className="text-slate-400 text-sm"> / month</span>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center border-b border-slate-700/50 pb-4">
-                    <span className="font-bold text-lg">10,000 credits</span>
-                    <div className="text-right">
-                      <span className="font-bold text-xl">$60</span>
-                      <span className="text-slate-400 text-sm"> / month</span>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center pt-2">
-                    <span className="font-medium text-slate-400">Additional 10,000 credits</span>
-                    <div className="text-right">
-                      <span className="font-bold text-slate-300">$60</span>
-                      <span className="text-slate-500 text-sm"> / month</span>
-                    </div>
+                  <div className="mt-4 sm:mt-0 text-left sm:text-right">
+                    <div className="text-3xl font-extrabold text-[#0F172A]">${additionalUsers * ADDON_PRICING.user}</div>
+                    <div className="text-sm font-medium text-slate-500">/ month</div>
                   </div>
                 </div>
+                
+                <div className="flex items-center gap-4 sm:gap-6">
+                  <button 
+                    onClick={() => setAdditionalUsers(Math.max(0, additionalUsers - 1))} 
+                    className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-colors font-bold text-xl"
+                    aria-label="Decrease users"
+                  >
+                    -
+                  </button>
+                  <div className="flex-1">
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={additionalUsers}
+                      onChange={(e) => setAdditionalUsers(parseInt(e.target.value))}
+                      className="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                      aria-label="Additional Users slider"
+                    />
+                    <div className="flex justify-between text-[10px] sm:text-xs font-bold text-slate-400 mt-3 uppercase tracking-wider">
+                      <span>0 users</span>
+                      <span className="text-[#0F172A] text-sm">{additionalUsers} users</span>
+                      <span>100 users</span>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={() => setAdditionalUsers(additionalUsers + 1)} 
+                    className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-colors font-bold text-xl"
+                    aria-label="Increase users"
+                  >
+                    +
+                  </button>
+                </div>
               </div>
-              
-              <div className="bg-slate-800/30 p-6 rounded-xl border border-slate-700 mt-auto">
-                <p className="text-sm text-slate-400 leading-relaxed mb-4">
-                  Zeta credits represent AI usage within Acrely WMS. Different requests consume different amounts depending on the complexity of the operation.
-                </p>
-                <ul className="space-y-2 text-sm text-slate-400">
-                  <li className="flex justify-between"><span>Simple warehouse question</span> <span className="font-medium text-slate-300">~1 credit</span></li>
-                  <li className="flex justify-between"><span>Operational summary</span> <span className="font-medium text-slate-300">~5 credits</span></li>
-                  <li className="flex justify-between"><span>Detailed report</span> <span className="font-medium text-slate-300">~10 credits</span></li>
-                  <li className="flex justify-between"><span>Complex analysis</span> <span className="font-medium text-slate-300">~20 credits</span></li>
-                  <li className="flex justify-between"><span>Deep multi-warehouse analysis</span> <span className="font-medium text-slate-300">30+ credits</span></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        {/* Scale Your Plan */}
-        <div className="mb-24">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-extrabold text-[#0F172A] mb-4">Scale your plan when you need more capacity</h2>
-            <p className="text-[#64748B] text-lg max-w-3xl mx-auto">
-              Your plan includes a defined number of users and warehouses. Additional capacity can be added without immediately moving to a higher plan.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white p-8 rounded-xl border border-[#E5E7EB] shadow-sm">
-              <div className="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mb-6">
-                <Users className="w-6 h-6" />
+              {/* Warehouses Config */}
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8">
+                  <div>
+                    <h3 className="text-xl font-bold text-[#0F172A] flex items-center gap-2">
+                      <Building2 className="w-5 h-5 text-blue-600" />
+                      Additional Warehouses
+                    </h3>
+                    <p className="text-sm text-slate-500 mt-1">Add additional warehouse locations as your operation expands.</p>
+                  </div>
+                  <div className="mt-4 sm:mt-0 text-left sm:text-right">
+                    <div className="text-3xl font-extrabold text-[#0F172A]">${additionalWarehouses * ADDON_PRICING.warehouse}</div>
+                    <div className="text-sm font-medium text-slate-500">/ month</div>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-4 sm:gap-6">
+                  <button 
+                    onClick={() => setAdditionalWarehouses(Math.max(0, additionalWarehouses - 1))} 
+                    className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-colors font-bold text-xl"
+                    aria-label="Decrease warehouses"
+                  >
+                    -
+                  </button>
+                  <div className="flex-1">
+                    <input
+                      type="range"
+                      min="0"
+                      max="20"
+                      value={additionalWarehouses}
+                      onChange={(e) => setAdditionalWarehouses(parseInt(e.target.value))}
+                      className="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                      aria-label="Additional Warehouses slider"
+                    />
+                    <div className="flex justify-between text-[10px] sm:text-xs font-bold text-slate-400 mt-3 uppercase tracking-wider">
+                      <span>0 warehouses</span>
+                      <span className="text-[#0F172A] text-sm">{additionalWarehouses} warehouses</span>
+                      <span>20 warehouses</span>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={() => setAdditionalWarehouses(additionalWarehouses + 1)} 
+                    className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-colors font-bold text-xl"
+                    aria-label="Increase warehouses"
+                  >
+                    +
+                  </button>
+                </div>
               </div>
-              <h3 className="font-bold text-xl text-[#0F172A] mb-3">Additional Users</h3>
-              <p className="text-[#64748B] text-sm leading-relaxed">
-                For customers who need more warehouse operators, supervisors, or managers than their plan includes.
-              </p>
-            </div>
-            <div className="bg-white p-8 rounded-xl border border-[#E5E7EB] shadow-sm">
-              <div className="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mb-6">
-                <Building2 className="w-6 h-6" />
+
+              {/* Zeta Config */}
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
+                <div className="flex items-center gap-2 mb-2">
+                  <Sparkles className="w-5 h-5 text-blue-600" />
+                  <h3 className="text-xl font-bold text-[#0F172A]">Zeta Intelligence Credits</h3>
+                </div>
+                <p className="text-sm text-slate-500 mb-6">Zeta is Acrely WMS's AI warehouse intelligence layer. Ask operational questions in natural language.</p>
+                
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {ZETA_PACKAGES.map((pkg) => (
+                    <div 
+                      key={pkg.id}
+                      onClick={() => setSelectedZeta(pkg.id)}
+                      className={`p-5 rounded-xl border-2 cursor-pointer transition-all flex flex-col justify-between h-full ${
+                        selectedZeta === pkg.id 
+                          ? 'border-[#1E40AF] bg-blue-50/30 shadow-sm' 
+                          : 'border-slate-200 hover:border-blue-300'
+                      }`}
+                    >
+                      <div>
+                        <div className="flex items-center justify-between mb-4">
+                          <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${selectedZeta === pkg.id ? 'border-[#1E40AF] bg-[#1E40AF]' : 'border-slate-300'}`}>
+                            {selectedZeta === pkg.id && <div className="w-2 h-2 bg-white rounded-full"></div>}
+                          </div>
+                        </div>
+                        <div className="font-bold text-[#0F172A] leading-tight mb-2">{pkg.label}</div>
+                      </div>
+                      <div className="mt-4">
+                        <div className={`text-lg font-extrabold ${selectedZeta === pkg.id ? 'text-[#1E40AF]' : 'text-slate-700'}`}>
+                          {pkg.price === 0 ? 'Included' : `$${pkg.price}`}
+                        </div>
+                        {pkg.price > 0 && <div className="text-xs font-medium text-slate-500">/ month</div>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <h3 className="font-bold text-xl text-[#0F172A] mb-3">Additional Warehouses</h3>
-              <p className="text-[#64748B] text-sm leading-relaxed">
-                For customers expanding their warehouse network.
-              </p>
-            </div>
-            <div className="bg-white p-8 rounded-xl border border-[#E5E7EB] shadow-sm">
-              <div className="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mb-6">
-                <Sparkles className="w-6 h-6" />
-              </div>
-              <h3 className="font-bold text-xl text-[#0F172A] mb-3">Additional Zeta Credits</h3>
-              <p className="text-[#64748B] text-sm leading-relaxed">
-                For customers whose AI usage exceeds their included allocation.
-              </p>
+
             </div>
           </div>
         </div>
@@ -589,6 +744,93 @@ export const PricingPage: React.FC = () => {
         </div>
 
       </div>
+
+      {/* Sticky Live Summary */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-200 shadow-[0_-10px_30px_rgba(0,0,0,0.08)] transform transition-transform">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8">
+          
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 w-full lg:w-auto overflow-x-auto no-scrollbar pb-2 lg:pb-0">
+            <div className="flex-shrink-0 flex items-center gap-4">
+              <div>
+                <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-0.5">Your Plan</div>
+                <div className="font-bold text-lg text-[#0F172A] flex items-center gap-2">
+                  {selectedPlan} 
+                </div>
+              </div>
+            </div>
+            
+            {(additionalUsers > 0 || additionalWarehouses > 0 || selectedZeta !== 'none') && (
+              <div className="hidden sm:block w-px h-10 bg-slate-200"></div>
+            )}
+
+            <div className="flex gap-6 sm:gap-8 whitespace-nowrap">
+              {additionalUsers > 0 && (
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-0.5">Additional Users</div>
+                  <div className="font-medium text-[#0F172A]">{additionalUsers} <span className="text-slate-400">(${additionalUsers * ADDON_PRICING.user})</span></div>
+                </div>
+              )}
+              {additionalWarehouses > 0 && (
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-0.5">Additional Warehouses</div>
+                  <div className="font-medium text-[#0F172A]">{additionalWarehouses} <span className="text-slate-400">(${additionalWarehouses * ADDON_PRICING.warehouse})</span></div>
+                </div>
+              )}
+              {selectedZeta !== 'none' && (
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-0.5">Zeta Credits</div>
+                  <div className="font-medium text-[#0F172A]">
+                    {ZETA_PACKAGES.find(p => p.id === selectedZeta)?.label} 
+                    <span className="text-slate-400 ml-1">(${ZETA_PACKAGES.find(p => p.id === selectedZeta)?.price})</span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between lg:justify-end gap-6 w-full lg:w-auto border-t border-slate-100 lg:border-t-0 pt-3 lg:pt-0">
+            <div className="text-left lg:text-right">
+              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-0.5">Total Recurring</div>
+              
+              {isCustom ? (
+                <div className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">Custom Pricing</div>
+              ) : (
+                <div className="flex flex-col">
+                  {PROMOTION_ACTIVE && selectedPlan !== 'Free' ? (
+                    <div className="flex items-center gap-3">
+                      <div className="flex flex-col">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-600">First Month</span>
+                        <span className="text-lg font-extrabold text-emerald-600 leading-none">FREE</span>
+                      </div>
+                      <div className="w-px h-8 bg-slate-200"></div>
+                      <div className="flex flex-col">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Then</span>
+                        <div className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] leading-none">
+                          ${totalMonthly}
+                          <span className="text-sm text-slate-500 font-medium ml-1">/ mo</span>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] leading-none">
+                      ${totalMonthly}
+                      <span className="text-sm text-slate-500 font-medium ml-1">/ mo</span>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+            
+            <Link
+              to="/contact"
+              className="py-3.5 px-8 bg-[#1E40AF] text-white font-bold rounded-xl hover:bg-[#2563EB] transition-colors shadow-md flex-shrink-0 text-center"
+            >
+              {isCustom ? 'Talk to Sales' : 'Get Started'}
+            </Link>
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 };
