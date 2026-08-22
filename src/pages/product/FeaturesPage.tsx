@@ -1,5 +1,5 @@
 import React from 'react';
-import { featuresContent } from '../data/featuresContent';
+import { featuresContent } from '../../data/featuresContent';
 import { Link } from 'react-router-dom';
 import { ChevronRight, TrendingUp, ArrowRight } from 'lucide-react';
 

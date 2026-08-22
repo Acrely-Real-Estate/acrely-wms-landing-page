@@ -1,23 +1,23 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { MainLayout } from './layouts/MainLayout';
-import { LandingPage } from './pages/LandingPage';
-import { ContactPage } from './pages/ContactPage';
-import { FeaturesPage } from './pages/FeaturesPage';
-import { FeatureDetailsPage } from './pages/FeatureDetailsPage';
-import { PricingPage } from './pages/PricingPage';
-import { SecurityPage } from './pages/SecurityPage';
-import { IntegrationsPage } from './pages/IntegrationsPage';
-import { AboutPage } from './pages/AboutPage';
-import { CareersPage } from './pages/CareersPage';
-import { IndustryDetailsPage } from './pages/IndustryDetailsPage';
-import { ImplementationPage } from './pages/ImplementationPage';
-import { ProductTourPage } from './pages/ProductTourPage';
-import BookDemoPage from './pages/BookDemoPage';
-import { DownloadPage } from './pages/DownloadPage';
+import { LandingPage } from './pages/marketing/LandingPage';
+import { ContactPage } from './pages/marketing/ContactPage';
+import { FeaturesPage } from './pages/product/FeaturesPage';
+import { FeatureDetailsPage } from './pages/product/FeatureDetailsPage';
+import { PricingPage } from './pages/product/PricingPage';
+import { SecurityPage } from './pages/product/SecurityPage';
+import { IntegrationsPage } from './pages/product/IntegrationsPage';
+import { AboutPage } from './pages/marketing/AboutPage';
+import { CareersPage } from './pages/marketing/CareersPage';
+import { IndustryDetailsPage } from './pages/product/IndustryDetailsPage';
+import { ImplementationPage } from './pages/product/ImplementationPage';
+import { ProductTourPage } from './pages/product/ProductTourPage';
+import BookDemoPage from './pages/marketing/BookDemoPage';
+import { DownloadPage } from './pages/product/DownloadPage';
 import { DocsLayout } from './components/docs/DocsLayout';
-import { PrivacyPage } from './pages/PrivacyPage';
-import { TermsPage } from './pages/TermsPage';
+import { PrivacyPage } from './pages/legal/PrivacyPage';
+import { TermsPage } from './pages/legal/TermsPage';
 
 export default function App() {
   return (
