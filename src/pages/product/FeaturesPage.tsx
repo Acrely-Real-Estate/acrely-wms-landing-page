@@ -1,5 +1,5 @@
 import React from 'react';
-import { featuresContent } from '../../data/featuresContent';
+import { featureRegistry } from '../../data/featureRegistry';
 import { Link } from 'react-router-dom';
 import { ChevronRight, TrendingUp, ArrowRight } from 'lucide-react';
 
@@ -24,7 +24,7 @@ export const FeaturesPage: React.FC = () => {
 
           {/* Feature Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-            {[...featuresContent]
+            {[...featureRegistry]
               .sort((a, b) => ((a as any).isComingSoon === (b as any).isComingSoon ? 0 : (a as any).isComingSoon ? 1 : -1))
               .map((feature) => {
               const Icon = feature.icon;
