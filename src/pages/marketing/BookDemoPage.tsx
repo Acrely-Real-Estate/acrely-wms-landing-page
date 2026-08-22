@@ -14,7 +14,7 @@ import {
   submitBookDemo,
   type BookDemoFormData,
   type FormErrors,
-} from "../logic/bookDemoLogic";
+} from "../../services/bookDemoService";
 
 const BookDemoPage: React.FC = () => {
   const [formData, setFormData] =

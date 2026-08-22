@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight, Lock, CheckCircle2, QrCode, Building2, Users, Database, Zap, Smartphone, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import dashboardImage from '../assets/hero-dashboard-app.png';
+import dashboardImage from '../../assets/hero-dashboard-app.png';
 
 export const Hero: React.FC = () => {
   const trustIndicators = [

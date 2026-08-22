@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookDemoSection } from '../components/docs/BookDemoSection';
+import { BookDemoSection } from '../../components/sections/BookDemoSection';
 
 import { ArrowDown, CheckCircle2, Search, Database, Box, Map, Users, Barcode, GraduationCap, Rocket } from 'lucide-react';
 

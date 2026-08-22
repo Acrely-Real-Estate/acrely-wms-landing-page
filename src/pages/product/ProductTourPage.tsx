@@ -13,7 +13,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { BookDemoSection } from '../components/docs/BookDemoSection';
+import { BookDemoSection } from '../../components/sections/BookDemoSection';
 
 const tourSteps = [
   { 
