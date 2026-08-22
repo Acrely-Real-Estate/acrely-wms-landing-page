@@ -57,6 +57,8 @@ export const FeatureDetailsPage: React.FC = () => {
     );
   }
 
+  const Icon = feature.icon;
+
   return (
     <div className="pt-16 bg-white min-h-screen pb-24">
       
@@ -68,7 +70,7 @@ export const FeatureDetailsPage: React.FC = () => {
           </Link>
           <div className="flex items-center gap-4 mb-6">
             <div className="w-16 h-16 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shrink-0">
-              <feature.icon className="w-8 h-8" />
+              <Icon className="w-8 h-8" />
             </div>
             <div>
               <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
