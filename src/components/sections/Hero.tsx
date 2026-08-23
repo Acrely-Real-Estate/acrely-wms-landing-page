@@ -96,7 +96,7 @@ export const Hero: React.FC = () => {
           <div className="flex flex-wrap justify-center gap-4 sm:gap-8 lg:gap-12">
             {trustIndicators.map((indicator, idx) => (
               <div key={idx} className="flex items-center gap-2.5 text-[#334155]">
-                <indicator.icon className="w-5 h-5 text-[#1E40AF]" />
+                {(() => { const Icon = indicator.icon; return Icon ? <Icon className="w-5 h-5 text-[#1E40AF]" /> : null; })()}
                 <span className="font-semibold text-sm sm:text-base">{indicator.name}</span>
               </div>
             ))}

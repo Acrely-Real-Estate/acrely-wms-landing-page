@@ -107,7 +107,7 @@ export const Navbar: React.FC = () => {
         },
         {
           label: '3PL',
-          path: '/features/multi-warehouse-multi-client',
+          path: '/features/3pl',
           description:
             'Support growing client and warehouse complexity.',
           icon: Building2,
@@ -196,6 +196,8 @@ export const Navbar: React.FC = () => {
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setOpenDropdown(null);
+    window.scrollTo(0, 0);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -535,7 +537,7 @@ export const Navbar: React.FC = () => {
                         >
                           <div className="mt-0.5 flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-[#1E40AF]">
                             {item.icon ? (
-                              <item.icon className="h-4 w-4" />
+                              (() => { const Icon = item.icon; return Icon ? <Icon className="h-4 w-4" /> : null; })()
                             ) : null}
                           </div>
 
@@ -569,7 +571,7 @@ export const Navbar: React.FC = () => {
                       >
                         <div className="mt-0.5 flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-[#1E40AF]">
                           {item.icon ? (
-                            <item.icon className="h-4 w-4" />
+                            (() => { const Icon = item.icon; return Icon ? <Icon className="h-4 w-4" /> : null; })()
                           ) : null}
                         </div>
 

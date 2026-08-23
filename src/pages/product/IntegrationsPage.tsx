@@ -95,7 +95,7 @@ export const IntegrationsPage: React.FC = () => {
                   <div key={i} className="bg-white border border-[#E5E7EB] rounded-xl p-6 flex flex-col h-full shadow-sm">
                     <div className="flex items-start justify-between mb-4">
                       <div className="w-12 h-12 rounded-lg bg-slate-50 text-[#1E40AF] flex items-center justify-center border border-slate-100">
-                        <item.icon className="w-6 h-6" />
+                        {(() => { const Icon = item.icon; return Icon ? <Icon className="w-6 h-6" /> : null; })()}
                       </div>
                       <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider bg-slate-50 px-2 py-1 rounded">
                         {item.type}

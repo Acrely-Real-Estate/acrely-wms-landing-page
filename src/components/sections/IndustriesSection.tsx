@@ -83,7 +83,7 @@ export const IndustriesSection: React.FC = () => {
               className="bg-white border border-[#E5E7EB] rounded-2xl p-6 hover:border-[#1E40AF] transition-colors group flex flex-col h-full shadow-sm"
             >
               <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#1E40AF] flex items-center justify-center mb-6">
-                <industry.icon className="w-6 h-6" />
+                {(() => { const Icon = industry.icon; return Icon ? <Icon className="w-6 h-6" /> : null; })()}
               </div>
               <h3 className="text-xl font-bold text-[#0F172A] mb-3">{industry.title}</h3>
               <p className="text-[#64748B] text-sm leading-relaxed flex-grow">

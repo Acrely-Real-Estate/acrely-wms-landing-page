@@ -55,7 +55,7 @@ export const WhyAcrelySection: React.FC = () => {
           {usps.map((usp, idx) => (
             <div key={idx} className="bg-slate-50 border border-slate-200 rounded-2xl p-8 hover:shadow-md transition-shadow">
               <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 shadow-sm border ${usp.title.includes('Zeta') ? 'bg-blue-600 text-white border-blue-700' : 'bg-white text-[#1E40AF] border-slate-200'}`}>
-                <usp.icon className="w-6 h-6" />
+                {(() => { const Icon = usp.icon; return Icon ? <Icon className="w-6 h-6" /> : null; })()}
               </div>
               <h3 className="text-xl font-bold text-[#0F172A] mb-3">{usp.title}</h3>
               <p className="text-[#475569] leading-relaxed text-sm">
