@@ -173,11 +173,8 @@ export function toggleRequirement(
 export async function submitBookDemo(
   formData: BookDemoFormData
 ) {
-  const apiUrl =
-    ((import.meta as any).env?.VITE_API_URL as string) ||
-    (import.meta.env.PROD 
-      ? "https://wms-landing-backend.onrender.com" 
-      : "http://localhost:5000");
+  const { getApiBaseUrl } = await import('../config/api');
+  const apiUrl = getApiBaseUrl();
 
   const response = await fetch(
     `${apiUrl}/api/book-demo`,

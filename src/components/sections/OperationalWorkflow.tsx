@@ -1,143 +1,203 @@
-import React, { useState } from 'react';
-import { Truck, Box, CheckSquare, Barcode, Printer, ScanLine, Building2, Map, Grid, Layers, Database, ShoppingCart, ClipboardList, UserCheck, Package, Send, BarChart } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { motion, useInView, AnimatePresence } from 'motion/react';
+import { 
+  Truck, 
+  ArrowDownToLine, 
+  Database, 
+  ClipboardList, 
+  Package, 
+  Send, 
+  Settings, 
+  CheckCircle2 
+} from 'lucide-react';
+
+const stages = [
+  {
+    id: 'receiving',
+    label: 'Receive',
+    icon: Truck,
+    title: 'Inbound Receiving',
+    description: 'Log truck arrivals, unload goods, perform quality inspection, and confirm received quantities against purchase orders.',
+    systemAction: 'System records receipt, generates barcodes, and updates expected inventory.',
+    operator: 'Dock Receiver',
+    highlight: 'Eliminates lost manifests and ghost receipts.',
+  },
+  {
+    id: 'putaway',
+    label: 'Put Away',
+    icon: ArrowDownToLine,
+    title: 'Directed Putaway',
+    description: 'System calculates optimal storage location based on zone, rack availability, product type, and rotation rules.',
+    systemAction: 'Directs worker to exact bin via mobile scanner. Confirms placement with barcode scan.',
+    operator: 'Putaway Worker',
+    highlight: 'Prevents misplaced pallets and wasted warehouse space.',
+  },
+  {
+    id: 'inventory',
+    label: 'Inventory',
+    icon: Database,
+    title: 'Live Inventory',
+    description: 'Real-time visibility across all bins, racks, zones, and warehouses. Every scan instantly updates the central ledger.',
+    systemAction: 'Maintains transaction-level audit trail. Triggers low-stock alerts and reorder signals.',
+    operator: 'System (Automated)',
+    highlight: '99.9% inventory accuracy without manual spreadsheets.',
+  },
+  {
+    id: 'picking',
+    label: 'Pick',
+    icon: ClipboardList,
+    title: 'Order Picking',
+    description: 'Orders drop in via API or manual entry. System generates optimized pick lists and routes workers through the warehouse.',
+    systemAction: 'Batches orders, calculates shortest path, validates each pick via barcode scan.',
+    operator: 'Picker',
+    highlight: 'Eliminates wrong-item shipments and reduces walk time.',
+  },
+  {
+    id: 'packing',
+    label: 'Pack',
+    icon: Package,
+    title: 'Packing & Verification',
+    description: 'Picked items are verified, packed into cartons, and labeled for shipment. System generates packing slips.',
+    systemAction: 'Validates pack contents against order. Prevents missing or incorrect items.',
+    operator: 'Packer',
+    highlight: 'Zero packing errors with scan verification.',
+  },
+  {
+    id: 'dispatch',
+    label: 'Dispatch',
+    icon: Send,
+    title: 'Outbound Dispatch',
+    description: 'Packed shipments are scanned to the outbound dock, assigned to carriers, and marked as shipped.',
+    systemAction: 'Deducts shipped stock, updates order status, triggers ASN to downstream systems.',
+    operator: 'Shipping Clerk',
+    highlight: 'Prevents loading wrong orders onto wrong trucks.',
+  },
+];
 
 export const OperationalWorkflow: React.FC = () => {
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStage, setActiveStage] = useState(0);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const isHeaderInView = useInView(headerRef, { once: true, margin: "-100px" });
 
-  const workflowSteps = [
-    { title: "Receive Truck", icon: Truck, who: "Dock Receiver", action: "Logs arrival in Acrely WMS", value: "Tracks inbound SLA", errorReduced: "Eliminates lost manifests" },
-    { title: "Unload Goods", icon: Box, who: "Forklift Operator", action: "Confirms quantity unloaded", value: "Updates pending receiving", errorReduced: "Prevents ghost receipts" },
-    { title: "Quality Inspection", icon: CheckSquare, who: "QA Inspector", action: "Records pass/fail metrics", value: "Quarantines bad stock", errorReduced: "Stops defective shipments" },
-    { title: "Generate Barcode", icon: Barcode, who: "System", action: "Auto-generates unique LPN", value: "Standardizes tracking", errorReduced: "Removes duplicate IDs" },
-    { title: "Print Label", icon: Printer, who: "Receiver", action: "Prints via integrated Zebra", value: "Physical identification", errorReduced: "Stops illegible handwriting" },
-    { title: "Scan Product", icon: ScanLine, who: "Putaway Worker", action: "Scans label to initiate move", value: "Validates handling unit", errorReduced: "Prevents moving wrong pallet" },
-    { title: "Assign Warehouse", icon: Building2, who: "System", action: "Routes to correct facility", value: "Multi-site accuracy", errorReduced: "Wrong-site inventory" },
-    { title: "Assign Zone", icon: Map, who: "System", action: "Selects temp/dry zone", value: "Ensures compliance", errorReduced: "Spoilage or compliance fines" },
-    { title: "Assign Rack", icon: Grid, who: "System", action: "Finds optimal rack path", value: "Maximizes density", errorReduced: "Wasted warehouse space" },
-    { title: "Assign Bin", icon: Layers, who: "System", action: "Directs to specific bin", value: "Precise putaway", errorReduced: "Lost pallets in aisles" },
-    { title: "Inventory Updated", icon: Database, who: "System", action: "Commits stock to ledger", value: "Real-time visibility", errorReduced: "Delayed ERP syncs" },
-    { title: "Order Received", icon: ShoppingCart, who: "ERP/API", action: "Injects sales order", value: "Automated fulfillment", errorReduced: "Manual data entry typos" },
-    { title: "Pick Task Generated", icon: ClipboardList, who: "System", action: "Batches orders for efficiency", value: "Reduces travel time", errorReduced: "Inefficient walk paths" },
-    { title: "Worker Picks", icon: UserCheck, who: "Picker", action: "Scans bin and item", value: "Validates exact item", errorReduced: "Wrong item shipped" },
-    { title: "Packing", icon: Package, who: "Packer", action: "Scans into carton", value: "Generates packing slip", errorReduced: "Missing items in box" },
-    { title: "Dispatch", icon: Send, who: "Shipping", action: "Scans to outbound dock", value: "Triggers ASN", errorReduced: "Loading wrong truck" },
-    { title: "Inventory Updated", icon: Database, who: "System", action: "Deducts shipped stock", value: "Accurate stock levels", errorReduced: "Overselling on channels" },
-    { title: "Reports", icon: BarChart, who: "Manager", action: "Reviews productivity", value: "Continuous improvement", errorReduced: "Blind operational bottlenecks" }
-  ];
+  const activeStageData = stages[activeStage];
+  const Icon = activeStageData.icon;
 
   return (
-    <section className="py-24 bg-[#F8FAFC] border-b border-[#E5E7EB]">
+    <section className="bg-[#F8FAFC] border-b border-[#E5E7EB] py-24 md:py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#1E40AF] block mb-2">
+        
+        {/* Header */}
+        <motion.div
+          ref={headerRef}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isHeaderInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="max-w-3xl mx-auto mb-16 text-center"
+        >
+          <div className="text-xs font-semibold uppercase tracking-wider text-[#1E40AF] mb-3">
             The Complete Operation
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-4">
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] tracking-tight mb-4">
             How Acrely WMS Works
           </h2>
-          <p className="text-lg text-[#64748B] leading-relaxed">
-            Follow a product from the inbound dock to the outbound dispatch. See exactly how our system orchestrates every movement.
+          <p className="text-lg text-[#64748B]">
+            Follow a product from the inbound dock to the outbound dispatch. See how Acrely orchestrates every movement.
           </p>
+        </motion.div>
+
+        {/* Tab Navigation */}
+        <div className="relative mb-8 max-w-4xl mx-auto">
+          {/* Background line for progress bar effect */}
+          <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-[#E5E7EB] -translate-y-1/2 hidden md:block z-0" />
+          
+          <div className="relative z-10 flex overflow-x-auto hide-scrollbar gap-2 md:justify-between pb-4 md:pb-0">
+            {stages.map((stage, index) => {
+              const TabIcon = stage.icon;
+              const isActive = activeStage === index;
+              return (
+                <button
+                  key={stage.id}
+                  onClick={() => setActiveStage(index)}
+                  className={`flex items-center gap-2 whitespace-nowrap px-4 py-2.5 rounded-lg transition-colors flex-shrink-0 ${
+                    isActive 
+                      ? 'bg-[#1E40AF] text-white shadow-sm' 
+                      : 'bg-white md:bg-[#F8FAFC] text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100 border border-[#E5E7EB] md:border-transparent'
+                  }`}
+                  aria-selected={isActive}
+                  role="tab"
+                >
+                  <TabIcon className="w-5 h-5" />
+                  <span className="font-medium">{stage.label}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-8">
-          {/* Interactive Steps List */}
-          <div className="lg:col-span-5 bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-sm h-[600px] flex flex-col">
-            <div className="p-4 border-b border-[#E5E7EB] bg-slate-50 font-bold text-[#0F172A]">
-              Operational Workflow
-            </div>
-            <div className="overflow-y-auto flex-1 p-2 space-y-1 scrollbar-thin scrollbar-thumb-slate-200">
-              {workflowSteps.map((step, idx) => {
-                const isActive = activeStep === idx;
-                const Icon = step.icon;
-                return (
-                  <button
-                    key={idx}
-                    onClick={() => setActiveStep(idx)}
-                    className={`w-full text-left px-4 py-3 rounded-lg flex items-center gap-3 transition-colors ${isActive ? 'bg-[#1E40AF] text-white' : 'hover:bg-slate-50 text-[#334155]'}`}
-                  >
-                    <div className={`w-8 h-8 rounded-md flex items-center justify-center shrink-0 ${isActive ? 'bg-white/20' : 'bg-slate-100 text-[#64748B]'}`}>
-                      <Icon className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className={`text-sm font-bold ${isActive ? 'text-white' : 'text-[#0F172A]'}`}>{step.title}</div>
-                      <div className={`text-xs ${isActive ? 'text-blue-100' : 'text-[#64748B]'}`}>{step.who}</div>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Step Detail Card */}
-          <div className="lg:col-span-7 flex flex-col">
-            <div className="bg-white border border-[#E5E7EB] rounded-2xl p-8 lg:p-12 shadow-sm flex-1 flex flex-col justify-center relative overflow-hidden">
-              
-              <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
-                {React.createElement(workflowSteps[activeStep].icon, { className: "w-64 h-64 text-[#1E40AF]" })}
-              </div>
-
-              <div className="relative z-10">
-                <div className="w-16 h-16 bg-blue-50 text-[#1E40AF] rounded-xl flex items-center justify-center mb-8 border border-blue-100">
-                  {React.createElement(workflowSteps[activeStep].icon, { className: "w-8 h-8" })}
-                </div>
-                
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="px-2.5 py-1 bg-slate-100 text-[#475569] text-xs font-bold uppercase tracking-wider rounded">
-                    Step {activeStep + 1} of {workflowSteps.length}
-                  </span>
-                  <span className="text-[#64748B] text-sm font-medium">Performed by: <strong className="text-[#0F172A]">{workflowSteps[activeStep].who}</strong></span>
-                </div>
-
-                <h3 className="text-3xl font-extrabold text-[#0F172A] mb-8">
-                  {workflowSteps[activeStep].title}
-                </h3>
-
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="text-sm font-bold text-[#64748B] uppercase tracking-wider mb-2">What Acrely WMS Does</h4>
-                    <p className="text-lg text-[#0F172A] font-medium">{workflowSteps[activeStep].action}</p>
+        {/* Detail Card */}
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white rounded-2xl border border-[#E5E7EB] shadow-sm p-8 lg:p-12 min-h-[480px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeStageData.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="grid lg:grid-cols-12 gap-8 items-start"
+              >
+                {/* Left Column */}
+                <div className="lg:col-span-7 space-y-6">
+                  <div className="w-16 h-16 bg-blue-50 text-[#1E40AF] rounded-xl border border-blue-100 flex items-center justify-center">
+                    <Icon className="w-8 h-8" />
                   </div>
                   
-                  <div className="grid sm:grid-cols-2 gap-6 pt-6 border-t border-[#E5E7EB]">
-                    <div>
-                      <h4 className="text-sm font-bold text-[#64748B] uppercase tracking-wider mb-2">Business Value</h4>
-                      <div className="flex items-start gap-2">
-                        <CheckSquare className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-                        <span className="text-[#334155] font-medium">{workflowSteps[activeStep].value}</span>
-                      </div>
+                  <div>
+                    <div className="text-sm font-semibold text-[#64748B] mb-2 uppercase tracking-wide">
+                      Step {activeStage + 1} of {stages.length}
                     </div>
-                    <div>
-                      <h4 className="text-sm font-bold text-[#64748B] uppercase tracking-wider mb-2">Errors Reduced</h4>
-                      <div className="flex items-start gap-2">
-                        <div className="w-5 h-5 rounded-full bg-red-100 text-red-600 flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">!</div>
-                        <span className="text-[#334155] font-medium">{workflowSteps[activeStep].errorReduced}</span>
-                      </div>
+                    <h3 className="text-3xl font-extrabold text-[#0F172A] mb-4">
+                      {activeStageData.title}
+                    </h3>
+                    <p className="text-lg text-[#64748B] leading-relaxed mb-6">
+                      {activeStageData.description}
+                    </p>
+                    
+                    <div className="inline-flex items-center bg-slate-100 rounded-full px-4 py-1.5 border border-[#E5E7EB]">
+                      <span className="text-sm font-medium text-[#334155]">
+                        Performed by: <span className="text-[#0F172A] font-semibold">{activeStageData.operator}</span>
+                      </span>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-12 flex items-center justify-between pt-6 border-t border-[#E5E7EB]">
-                  <button 
-                    onClick={() => setActiveStep(prev => Math.max(0, prev - 1))}
-                    disabled={activeStep === 0}
-                    className="text-sm font-bold text-[#1E40AF] disabled:opacity-30 disabled:cursor-not-allowed hover:underline"
-                  >
-                    Previous Step
-                  </button>
-                  <button 
-                    onClick={() => setActiveStep(prev => Math.min(workflowSteps.length - 1, prev + 1))}
-                    disabled={activeStep === workflowSteps.length - 1}
-                    className="px-4 py-2 bg-[#0F172A] text-white text-sm font-bold rounded-lg hover:bg-slate-800 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-                  >
-                    Next Step
-                  </button>
-                </div>
+                {/* Right Column */}
+                <div className="lg:col-span-5 space-y-4">
+                  <div className="bg-slate-50 rounded-xl p-6 border border-[#E5E7EB]">
+                    <div className="flex items-center gap-3 mb-3">
+                      <Settings className="w-5 h-5 text-[#1E40AF]" />
+                      <h4 className="font-semibold text-[#0F172A]">What the System Does</h4>
+                    </div>
+                    <p className="text-[#64748B] leading-relaxed">
+                      {activeStageData.systemAction}
+                    </p>
+                  </div>
 
-              </div>
-            </div>
+                  <div className="bg-slate-50 rounded-xl p-6 border border-[#E5E7EB]">
+                    <div className="flex items-center gap-3 mb-3">
+                      <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+                      <h4 className="font-semibold text-[#0F172A]">Key Benefit</h4>
+                    </div>
+                    <p className="text-[#64748B] leading-relaxed">
+                      {activeStageData.highlight}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
+
       </div>
     </section>
   );

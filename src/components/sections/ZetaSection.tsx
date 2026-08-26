@@ -1,18 +1,42 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Sparkles, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { motion, useInView } from 'motion/react';
 
 export const ZetaSection: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
+
+  const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.12 } } };
+  const fadeUp = {
+    hidden: { opacity: 0, y: 24 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] } },
+  };
+  const fadeRight = {
+    hidden: { opacity: 0, x: 30 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] } },
+  };
+
   return (
-    <section className="py-24 bg-slate-900 text-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} className="py-24 md:py-32 bg-slate-900 text-white overflow-hidden">
+      <motion.div
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        variants={stagger}
+        initial="hidden"
+        animate={isInView ? 'visible' : 'hidden'}
+      >
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div>
+          <motion.div variants={fadeUp}>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-wider mb-6 border border-blue-500/20">
               <Sparkles className="w-3.5 h-3.5" />
               Zeta — Warehouse Intelligence
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-6">
+
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-400 text-[10px] font-bold uppercase tracking-wider mb-6 ml-3 border border-amber-500/20">
+              In Development
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-6">
               Warehouse intelligence, built into the WMS.
             </h2>
             <p className="text-lg text-slate-400 leading-relaxed mb-10">
@@ -35,9 +59,9 @@ export const ZetaSection: React.FC = () => {
                 See Pricing
               </Link>
             </div>
-          </div>
+          </motion.div>
           
-          <div className="relative">
+          <motion.div variants={fadeRight} className="relative">
             <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-purple-600/20 blur-3xl rounded-full" />
             <div className="relative bg-slate-800/80 border border-slate-700 rounded-2xl p-6 shadow-2xl backdrop-blur-sm">
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-700">
@@ -72,9 +96,9 @@ export const ZetaSection: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
