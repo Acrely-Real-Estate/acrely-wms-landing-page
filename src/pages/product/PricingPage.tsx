@@ -519,22 +519,22 @@ export const PricingPage: React.FC = () => {
             <div className="max-w-4xl mx-auto space-y-6">
               
               {/* Users Config */}
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8">
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-8">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8">
                   <div>
-                    <h3 className="text-xl font-bold text-[#0F172A] flex items-center gap-2">
+                    <h3 className="text-lg sm:text-xl font-bold text-[#0F172A] flex items-center gap-2">
                       <Users className="w-5 h-5 text-blue-600" />
                       Additional Users
                     </h3>
-                    <p className="text-sm text-slate-500 mt-1">Add more warehouse operators, supervisors, or managers to your plan.</p>
+                    <p className="text-xs sm:text-sm text-slate-500 mt-1">Add more warehouse operators, supervisors, or managers to your plan.</p>
                   </div>
-                  <div className="mt-4 sm:mt-0 text-left sm:text-right">
-                    <div className="text-3xl font-extrabold text-[#0F172A]">${additionalUsers * ADDON_PRICING.user}</div>
-                    <div className="text-sm font-medium text-slate-500">/ month</div>
+                  <div className="mt-3 sm:mt-0 text-left sm:text-right">
+                    <div className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">${additionalUsers * ADDON_PRICING.user}</div>
+                    <div className="text-xs sm:text-sm font-medium text-slate-500">/ month</div>
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-4 sm:gap-6">
+                <div className="flex items-center gap-3 sm:gap-6">
                   <button 
                     onClick={() => setAdditionalUsers(Math.max(0, additionalUsers - 1))} 
                     className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-colors font-bold text-xl"
@@ -552,10 +552,10 @@ export const PricingPage: React.FC = () => {
                       className="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
                       aria-label="Additional Users slider"
                     />
-                    <div className="flex justify-between text-[10px] sm:text-xs font-bold text-slate-400 mt-3 uppercase tracking-wider">
-                      <span>0 users</span>
-                      <span className="text-[#0F172A] text-sm">{additionalUsers} users</span>
-                      <span>100 users</span>
+                    <div className="flex justify-between text-[10px] sm:text-xs font-bold text-slate-400 mt-2 sm:mt-3 uppercase tracking-wider">
+                      <span>0</span>
+                      <span className="text-[#0F172A] text-sm sm:text-base">{additionalUsers} users</span>
+                      <span>100</span>
                     </div>
                   </div>
                   <button 
@@ -569,22 +569,22 @@ export const PricingPage: React.FC = () => {
               </div>
 
               {/* Warehouses Config */}
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8">
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-8">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8">
                   <div>
-                    <h3 className="text-xl font-bold text-[#0F172A] flex items-center gap-2">
+                    <h3 className="text-lg sm:text-xl font-bold text-[#0F172A] flex items-center gap-2">
                       <Building2 className="w-5 h-5 text-blue-600" />
                       Additional Warehouses
                     </h3>
-                    <p className="text-sm text-slate-500 mt-1">Add additional warehouse locations as your operation expands.</p>
+                    <p className="text-xs sm:text-sm text-slate-500 mt-1">Add additional warehouse locations as your operation expands.</p>
                   </div>
-                  <div className="mt-4 sm:mt-0 text-left sm:text-right">
-                    <div className="text-3xl font-extrabold text-[#0F172A]">${additionalWarehouses * ADDON_PRICING.warehouse}</div>
-                    <div className="text-sm font-medium text-slate-500">/ month</div>
+                  <div className="mt-3 sm:mt-0 text-left sm:text-right">
+                    <div className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">${additionalWarehouses * ADDON_PRICING.warehouse}</div>
+                    <div className="text-xs sm:text-sm font-medium text-slate-500">/ month</div>
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-4 sm:gap-6">
+                <div className="flex items-center gap-3 sm:gap-6">
                   <button 
                     onClick={() => setAdditionalWarehouses(Math.max(0, additionalWarehouses - 1))} 
                     className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-colors font-bold text-xl"
@@ -602,10 +602,10 @@ export const PricingPage: React.FC = () => {
                       className="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
                       aria-label="Additional Warehouses slider"
                     />
-                    <div className="flex justify-between text-[10px] sm:text-xs font-bold text-slate-400 mt-3 uppercase tracking-wider">
-                      <span>0 warehouses</span>
-                      <span className="text-[#0F172A] text-sm">{additionalWarehouses} warehouses</span>
-                      <span>20 warehouses</span>
+                    <div className="flex justify-between text-[10px] sm:text-xs font-bold text-slate-400 mt-2 sm:mt-3 uppercase tracking-wider">
+                      <span>0</span>
+                      <span className="text-[#0F172A] text-sm sm:text-base">{additionalWarehouses} warehouses</span>
+                      <span>20</span>
                     </div>
                   </div>
                   <button 
@@ -747,39 +747,41 @@ export const PricingPage: React.FC = () => {
 
       {/* Sticky Live Summary */}
       <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-200 shadow-[0_-10px_30px_rgba(0,0,0,0.08)] transform transition-transform">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-5 flex flex-col lg:flex-row items-center justify-between gap-3 lg:gap-8">
           
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 w-full lg:w-auto overflow-x-auto no-scrollbar pb-2 lg:pb-0">
-            <div className="flex-shrink-0 flex items-center gap-4">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-8 w-full lg:w-auto overflow-hidden">
+            <div className="flex items-center gap-4 border-b border-slate-100 pb-2 lg:border-0 lg:pb-0">
               <div>
                 <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-0.5">Your Plan</div>
-                <div className="font-bold text-lg text-[#0F172A] flex items-center gap-2">
+                <div className="font-bold text-base sm:text-lg text-[#0F172A] flex items-center gap-2">
                   {selectedPlan} 
                 </div>
               </div>
             </div>
             
             {(additionalUsers > 0 || additionalWarehouses > 0 || selectedZeta !== 'none') && (
-              <div className="hidden sm:block w-px h-10 bg-slate-200"></div>
+              <div className="hidden lg:block w-px h-10 bg-slate-200"></div>
             )}
 
-            <div className="flex gap-6 sm:gap-8 whitespace-nowrap">
+            <div className="grid grid-cols-2 sm:flex sm:flex-row gap-x-2 gap-y-2 sm:gap-6 lg:gap-8">
               {additionalUsers > 0 && (
                 <div>
-                  <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-0.5">Additional Users</div>
-                  <div className="font-medium text-[#0F172A]">{additionalUsers} <span className="text-slate-400">(${additionalUsers * ADDON_PRICING.user})</span></div>
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-0.5">Users</div>
+                  <div className="text-xs sm:text-sm font-medium text-[#0F172A] truncate">{additionalUsers} <span className="text-slate-400">(${additionalUsers * ADDON_PRICING.user})</span></div>
                 </div>
               )}
               {additionalWarehouses > 0 && (
                 <div>
-                  <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-0.5">Additional Warehouses</div>
-                  <div className="font-medium text-[#0F172A]">{additionalWarehouses} <span className="text-slate-400">(${additionalWarehouses * ADDON_PRICING.warehouse})</span></div>
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-0.5 flex items-center">
+                    <span className="truncate">Warehouses</span>
+                  </div>
+                  <div className="text-xs sm:text-sm font-medium text-[#0F172A] truncate">{additionalWarehouses} <span className="text-slate-400">(${additionalWarehouses * ADDON_PRICING.warehouse})</span></div>
                 </div>
               )}
               {selectedZeta !== 'none' && (
-                <div>
-                  <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-0.5">Zeta Credits</div>
-                  <div className="font-medium text-[#0F172A]">
+                <div className="col-span-2 sm:col-span-1">
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-0.5">Zeta</div>
+                  <div className="text-xs sm:text-sm font-medium text-[#0F172A] truncate">
                     {ZETA_PACKAGES.find(p => p.id === selectedZeta)?.label} 
                     <span className="text-slate-400 ml-1">(${ZETA_PACKAGES.find(p => p.id === selectedZeta)?.price})</span>
                   </div>
@@ -788,33 +790,33 @@ export const PricingPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-between lg:justify-end gap-6 w-full lg:w-auto border-t border-slate-100 lg:border-t-0 pt-3 lg:pt-0">
-            <div className="text-left lg:text-right">
+          <div className="flex items-center justify-between lg:justify-end gap-4 sm:gap-6 w-full lg:w-auto border-t border-slate-100 lg:border-t-0 pt-3 lg:pt-0">
+            <div className="text-left lg:text-right flex-1 lg:flex-none">
               <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-0.5">Total Recurring</div>
               
               {isCustom ? (
-                <div className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">Custom Pricing</div>
+                <div className="text-xl sm:text-3xl font-extrabold text-[#0F172A]">Custom Pricing</div>
               ) : (
                 <div className="flex flex-col">
                   {PROMOTION_ACTIVE && selectedPlan !== 'Free' ? (
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3">
                       <div className="flex flex-col">
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-600">First Month</span>
-                        <span className="text-lg font-extrabold text-emerald-600 leading-none">FREE</span>
+                        <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-emerald-600">1st Mo</span>
+                        <span className="text-base sm:text-lg font-extrabold text-emerald-600 leading-none">FREE</span>
                       </div>
-                      <div className="w-px h-8 bg-slate-200"></div>
+                      <div className="w-px h-6 sm:h-8 bg-slate-200"></div>
                       <div className="flex flex-col">
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Then</span>
-                        <div className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] leading-none">
+                        <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-slate-400">Then</span>
+                        <div className="text-xl sm:text-3xl font-extrabold text-[#0F172A] leading-none">
                           ${totalMonthly}
-                          <span className="text-sm text-slate-500 font-medium ml-1">/ mo</span>
+                          <span className="text-xs sm:text-sm text-slate-500 font-medium ml-1">/mo</span>
                         </div>
                       </div>
                     </div>
                   ) : (
-                    <div className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] leading-none">
+                    <div className="text-xl sm:text-3xl font-extrabold text-[#0F172A] leading-none">
                       ${totalMonthly}
-                      <span className="text-sm text-slate-500 font-medium ml-1">/ mo</span>
+                      <span className="text-xs sm:text-sm text-slate-500 font-medium ml-1">/ mo</span>
                     </div>
                   )}
                 </div>
@@ -823,7 +825,7 @@ export const PricingPage: React.FC = () => {
             
             <Link
               to="/contact"
-              className="py-3.5 px-8 bg-[#1E40AF] text-white font-bold rounded-xl hover:bg-[#2563EB] transition-colors shadow-md flex-shrink-0 text-center"
+              className="py-2.5 px-4 sm:py-3.5 sm:px-8 bg-[#1E40AF] text-white text-sm sm:text-base font-bold rounded-xl hover:bg-[#2563EB] transition-colors shadow-md flex-shrink-0 text-center"
             >
               {isCustom ? 'Talk to Sales' : 'Get Started'}
             </Link>

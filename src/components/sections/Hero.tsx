@@ -61,7 +61,7 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section id="overview" className="relative bg-[#0F172A] pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden bg-dot-grid">
+    <section id="overview" className="relative bg-[#0F172A] pt-24 pb-20 md:pt-32 md:pb-28 lg:pt-20 lg:pb-24 overflow-hidden bg-dot-grid">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* TEXT CONTENT */}
@@ -111,7 +111,7 @@ export const Hero: React.FC = () => {
           variants={warehouseVariants}
           initial="hidden"
           animate="visible"
-          className="mt-20 w-full max-w-5xl mx-auto h-[300px] md:h-[450px] flex items-center justify-center relative"
+          className="mt-20 lg:mt-32 w-full max-w-5xl mx-auto h-[300px] md:h-[450px] lg:h-[480px] flex items-center justify-center relative"
           style={{ perspective: '1200px' }}
           role="img"
           aria-label="3D Warehouse Visualization"
@@ -200,7 +200,7 @@ export const Hero: React.FC = () => {
           variants={trustVariants}
           initial="hidden"
           animate="visible"
-          className="mt-16 flex flex-wrap items-center justify-center gap-6 md:gap-10"
+          className="mt-16 lg:mt-24 flex flex-wrap items-center justify-center gap-6 md:gap-10"
         >
           {trustIndicators.map((indicator, idx) => {
             const Icon = indicator.icon;
